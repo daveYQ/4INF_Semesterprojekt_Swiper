@@ -1,0 +1,2 @@
+C:\Users\User\Documents\Projekte\SYP_PROJEKT_23-24_Maier\Applikation\Swiper\swiper.client\obj\Debug\swiper.client.esproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Projekte\4INF_Semesterprojekt_Swiper\Swiper\swiper.client\obj\Debug\swiper.client.esproj.CoreCompileInputs.cache

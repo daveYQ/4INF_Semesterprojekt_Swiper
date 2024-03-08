@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "YaH/kCcCn9WcwT/GHvrKNH7BZovvL3T1NTtw5+8RAnw=",
+  "Source": "Swiper.Server",
+  "BasePath": "_content/Swiper.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\swiper.client\\swiper.client.esproj",
+      "Version": 2,
+      "Source": "swiper.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
