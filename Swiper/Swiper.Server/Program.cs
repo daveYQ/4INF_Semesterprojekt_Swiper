@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using Swiper.Server.Models;
+
 namespace Swiper.Server
 {
     public class Program
@@ -10,9 +13,13 @@ namespace Swiper.Server
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddMvc();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<UserContext>(options =>
+                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SwiperDB;Trusted_Connection=True;"));
 
             var app = builder.Build();
 
