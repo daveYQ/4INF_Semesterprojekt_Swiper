@@ -20,28 +20,40 @@ namespace Swiper.Server.Controllers
 
         // GET: UserController
         [HttpGet(Name = "GetUsers")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return Ok(_context.Users.ToList());
         }
 
         // GET: UserController/Details/5
-        [HttpGet("Details/{id}", Name = "GetData")]
-        public User Details(int id)
+        [HttpGet("/{id}", Name = "GetData")]
+        public async Task<IActionResult> Details(int id)
         {
-            return _context.Users.Find(id);
+            User? user = _context.Users.Find(id);
+
+            if (user is null)
+            {
+                return BadRequest("User not found.");
+            }
+
+            return Ok(user);
         }
 
-        // GET: UserController/Create
-        /*[HttpGet("Create", Name = "GetCreate")]
-        public User Create(User user)
+        [HttpDelete("Delete/{id}", Name = "DeleteUser")]
+        public async Task<IActionResult> Delete(int id)
         {
-            _context.Users.Add(user);
+            User? user = _context.Users.Find(id);
 
-            _context.SaveChanges();
-            
-            return user;
-        }*/
+            if (user is null)
+            {
+                return BadRequest("User not found.");
+            }
+
+            _context.Users.Remove(user);
+            _context.SaveChangesAsync();
+
+            return Ok(user);
+        }
 
         // POST: UserController/Create
         [HttpPost("Create", Name ="PostCreate")]
@@ -61,47 +73,20 @@ namespace Swiper.Server.Controllers
         }
 
         // GET: UserController/Edit/5
-        [HttpGet("Edit/{id}", Name = "GetEdit")]
-        public ActionResult Edit(int id)
+        [HttpPut("Edit", Name = "GetEdit")]
+        public async Task<ActionResult> Edit(User user)
         {
-            return View();
-        }
+            User? user2 = _context.Users.Find(user.Id);
 
-        // POST: UserController/Edit/5
-        [HttpPost("Edit", Name = "PostEdit")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
+            if (user2 is null)
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest("User not found");
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: UserController/Delete/5
-        [HttpGet("Delete", Name = "GetDelete")]
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
 
-        // POST: UserController/Delete/5
-        [HttpPost("Delete", Name = "PostDelete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return Ok(user);    
         }
     }
 }
