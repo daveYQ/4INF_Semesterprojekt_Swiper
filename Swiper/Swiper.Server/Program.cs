@@ -21,6 +21,8 @@ namespace Swiper.Server
             builder.Services.AddDbContext<UserContext>(options =>
                 options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SwiperDB;Trusted_Connection=True;"));
 
+            builder.Services.AddAutoMapper(typeof(Program));
+
             var app = builder.Build();
 
             app.UseDefaultFiles();

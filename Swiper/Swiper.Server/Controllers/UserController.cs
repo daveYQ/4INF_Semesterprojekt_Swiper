@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swiper.Server.Models;
@@ -9,20 +10,23 @@ namespace Swiper.Server.Controllers
     [Route("[controller]")]
     public class UserController : Controller
     {
-        private UserContext _context;
+        private readonly UserContext _context;
         private readonly ILogger<UserController> _logger;
+        private readonly IMapper _mapper;
 
-        public UserController(ILogger<UserController> logger, UserContext context)
+        public UserController(ILogger<UserController> logger, UserContext context, IMapper mapper)
         {
             this._logger = logger;
             this._context = context;
+            this._mapper = mapper;
         }
 
         // GET: UserController
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> Index()
         {
-            return Ok(_context.Users.ToList());
+            return Ok(_mapper.Map<IEnumerable<UserDTO>>(this._context.Users.ToList()));
+            //return Ok(_context.Users.ToList());
         }
 
         // GET: UserController/Details/5
