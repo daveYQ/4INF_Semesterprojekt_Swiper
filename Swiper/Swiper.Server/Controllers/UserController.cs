@@ -26,11 +26,10 @@ namespace Swiper.Server.Controllers
         public async Task<IActionResult> Index()
         {
             return Ok(_mapper.Map<IEnumerable<UserDTO>>(this._context.Users.ToList()));
-            //return Ok(_context.Users.ToList());
         }
 
         // GET: UserController/Details/5
-        [HttpGet("/{id}", Name = "GetData")]
+        [HttpGet("/{id}", Name = "GetUser")]
         public async Task<IActionResult> Details(int id)
         {
             User? user = _context.Users.Find(id);
@@ -40,7 +39,7 @@ namespace Swiper.Server.Controllers
                 return BadRequest("User not found.");
             }
 
-            return Ok(user);
+            return Ok(_mapper.Map<UserDTO>(user));
         }
 
         [HttpDelete("Delete/{id}", Name = "DeleteUser")]
@@ -56,7 +55,7 @@ namespace Swiper.Server.Controllers
             _context.Users.Remove(user);
             _context.SaveChangesAsync();
 
-            return Ok(user);
+            return Ok(_mapper.Map<UserDTO>(user));
         }
 
         // POST: UserController/Create
@@ -78,31 +77,28 @@ namespace Swiper.Server.Controllers
 
         // GET: UserController/Edit/5
         [HttpPut("Edit", Name = "GetEdit")]
-        public async Task<ActionResult> Edit(UserDTO user)
+        public async Task<ActionResult> Edit(UserDTO userDTO)
         {
-            User? user2 = _context.Users.Find(user.Id);
+            User? user = _context.Users.Find(userDTO.Id);
 
-            if (user2 is null)
+            if (user is null)
             {
                 return BadRequest("User not found");
             }
 
-            //user2.Name = user.Name;
-            //user2.Email = user.Email;
-
-            if (user.Name is not null)
+            if (userDTO.Name is not null)
             {
-                user2.Name = user.Name;
+                user.Name = userDTO.Name;
             }
-            if (user.Email is not null)
+            if (userDTO.Email is not null)
             {
-                user2.Email = user.Email; 
+                user.Email = userDTO.Email; 
             }
 
-            _context.Entry(user2).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return Ok(user2);
+            return Ok(user);
         }
     }
 }
