@@ -27,18 +27,23 @@ namespace Swiper.Server.Controllers
             return Ok(rels);
         }
 
-        //TODO: Add ids of user a and b to the route and add them to the relationship manually
+        //TODO: Request body as list of users (only 2 tho)
         [HttpPost("Create", Name = "Create")]
-        public async Task<IActionResult> Create(RelationshipDTO relationshipDTO)
+        public async Task<IActionResult> Create(UserDTO userADTO, UserDTO userBDTO)
         {
-            if(relationshipDTO.Id is not null) 
+            if(userADTO.Id is null || userBDTO is null) 
             {
-                relationshipDTO.Id = null;
+                return BadRequest();
             }
-            _context.Relationships.Add(_mapper.Map<Relationship>(relationshipDTO));
+
+            Relationship rel = new Relationship();
+            rel.UserA = _context.Users.Find(userADTO.Id);
+            rel.UserB = _context.Users.Find(userBDTO.Id);
+
+            _context.Relationships.Add(_mapper.Map<Relationship>(rel));
             await _context.SaveChangesAsync();
 
-            return Ok(relationshipDTO);
+            return Ok(rel);
         }
 
         [HttpPut("Edit", Name = "Edit")]

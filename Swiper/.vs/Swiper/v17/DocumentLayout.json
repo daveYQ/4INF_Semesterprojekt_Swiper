@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\controllers\\relationshipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\models\\relationshipdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\models\\relationshipdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\migrations\\20240318105420_addedrelationships.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -66,7 +66,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "RelationshipDTO.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Models\\RelationshipDTO.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Models\\RelationshipDTO.cs",
@@ -74,8 +74,7 @@
               "RelativeToolTip": "Swiper.Server\\Models\\RelationshipDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T10:07:43.948Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-18T10:07:43.948Z"
             },
             {
               "$type": "Document",
@@ -85,7 +84,7 @@
               "RelativeDocumentMoniker": "Swiper.Server\\Controllers\\RelationshipController.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Controllers\\RelationshipController.cs",
               "RelativeToolTip": "Swiper.Server\\Controllers\\RelationshipController.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAUwCgAAAAnAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAB0AAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-18T10:00:35.653Z",
               "EditorCaption": ""
@@ -100,8 +99,7 @@
               "RelativeToolTip": "Swiper.Server\\Controllers\\UserController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAFoAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T08:48:00.731Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-12T08:48:00.731Z"
             },
             {
               "$type": "Document",
@@ -113,8 +111,7 @@
               "RelativeToolTip": "Swiper.Server\\Models\\UserContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T09:52:14.559Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-18T09:52:14.559Z"
             },
             {
               "$type": "Document",
@@ -126,8 +123,7 @@
               "RelativeToolTip": "Swiper.Server\\Models\\Relationship.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T09:50:11.17Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-18T09:50:11.17Z"
             },
             {
               "$type": "Document",
@@ -139,8 +135,7 @@
               "RelativeToolTip": "Swiper.Server\\Models\\MappingProfiles.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T12:03:06.469Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-14T12:03:06.469Z"
             },
             {
               "$type": "Document",
@@ -152,12 +147,11 @@
               "RelativeToolTip": "Swiper.Server\\Models\\UserDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T10:09:47.394Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-14T10:09:47.394Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Models\\User.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Models\\User.cs",
@@ -165,8 +159,7 @@
               "RelativeToolTip": "Swiper.Server\\Models\\User.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T10:07:16.417Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-14T10:07:16.417Z"
             },
             {
               "$type": "Document",
@@ -182,13 +175,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Program.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Program.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Program.cs",
               "RelativeToolTip": "Swiper.Server\\Program.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAAAC4AAAAMAAAA",
+              "ViewState": "AQIAABoAAAAAAAAAAAAcwCoAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-07T10:09:49.719Z",
               "EditorCaption": ""
@@ -203,8 +196,7 @@
               "RelativeToolTip": "Swiper.Server\\Migrations\\20240318105420_AddedRelationships.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAAgwCAAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T11:00:06.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-18T11:00:06.004Z"
             },
             {
               "$type": "Document",
