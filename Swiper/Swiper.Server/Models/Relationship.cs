@@ -13,5 +13,13 @@ namespace Swiper.Server.Models
 
         public bool ALikedB { get; set; } = false;
         public bool BLikedA { get; set; } = false;
+
+        public Relationship() { }
+
+        public Relationship(User userA, User userB)
+        {
+            this.UserA = userA;
+            this.UserB = userB;
+        }
     }
 }

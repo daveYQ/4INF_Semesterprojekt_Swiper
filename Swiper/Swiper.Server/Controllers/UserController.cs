@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swiper.Server.Models;
 
 namespace Swiper.Server.Controllers
 {
-    [ApiController]
+    //[ApiController]
     [Route("[controller]")]
-    public class UserController : Controller
+    public class UserController : ControllerBase
     {
         private readonly UserContext _context;
         private readonly ILogger<UserController> _logger;
@@ -21,16 +20,14 @@ namespace Swiper.Server.Controllers
             this._mapper = mapper;
         }
 
-        // GET: UserController
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> Index()
         {
             return Ok(_mapper.Map<IEnumerable<UserDTO>>(this._context.Users.ToList()));
         }
 
-        // GET: UserController/Details/5
-        [HttpGet("/{id}", Name = "GetUser")]
-        public async Task<IActionResult> Details(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(int id)
         {
             User? user = _context.Users.Find(id);
 
@@ -42,7 +39,7 @@ namespace Swiper.Server.Controllers
             return Ok(_mapper.Map<UserDTO>(user));
         }
 
-        [HttpDelete("Delete/{id}", Name = "DeleteUser")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             User? user = _context.Users.Find(id);
@@ -58,16 +55,15 @@ namespace Swiper.Server.Controllers
             return Ok(_mapper.Map<UserDTO>(user));
         }
 
-        // POST: UserController/Create
-        [HttpPost("Create", Name = "PostCreate")]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(User user)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([FromBody]UserCreationDTO userCreationDto)
         {
             try
             {
-                await _context.Users.AddAsync(user);
+                await _context.Users.AddAsync(_mapper.Map<User>(userCreationDto));
                 await _context.SaveChangesAsync();
-                return Ok(user);
+                return Ok(userCreationDto);
             }
             catch
             {
@@ -75,9 +71,8 @@ namespace Swiper.Server.Controllers
             }
         }
 
-        // GET: UserController/Edit/5
-        [HttpPut("Edit", Name = "GetEdit")]
-        public async Task<ActionResult> Edit(UserDTO userDTO)
+        [HttpPut]
+        public async Task<ActionResult> Edit([FromBody]UserDTO userDTO)
         {
             User? user = _context.Users.Find(userDTO.Id);
 
@@ -99,6 +94,42 @@ namespace Swiper.Server.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(user);
+        }
+
+        [HttpGet("{id}/Like/{likeId}")]
+        public async Task<IActionResult> LikeUser(int id, int likeId)
+        {
+            if (id == likeId)
+            {
+                return BadRequest("Users cannot like themselves.");
+            }
+
+            User? userA = await _context.Users.FindAsync(id);
+            User? userB = await _context.Users.FindAsync(likeId);
+            if (userA is null || userB is null)
+            {
+                return BadRequest("User not found");
+            }
+
+            Relationship? rel = _context.Relationships.Where(rel => rel.UserA.Id == id || rel.UserB.Id == id || rel.UserA.Id == likeId || rel.UserB.Id == likeId).FirstOrDefault();
+
+            if(rel is null)
+            {
+                rel = new Relationship(userA, userB);
+                await _context.Relationships.AddAsync(rel);
+            }
+
+            if (id == rel.UserA.Id)
+            {
+                rel.ALikedB = true;
+            }
+            else
+            {
+                rel.BLikedA = true;
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok(_mapper.Map<RelationshipDTO>(rel));
         }
     }
 }
