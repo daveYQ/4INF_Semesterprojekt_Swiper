@@ -20,6 +20,12 @@ namespace Swiper.Server.Controllers
             this._mapper = mapper;
         }
 
+        [HttpGet("/Health")]
+        public async Task<IActionResult> Health()
+        {
+            return Ok("Up");
+        }
+
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> Index()
         {
@@ -50,7 +56,7 @@ namespace Swiper.Server.Controllers
             }
 
             _context.Users.Remove(user);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return Ok(_mapper.Map<UserDTO>(user));
         }
@@ -96,7 +102,7 @@ namespace Swiper.Server.Controllers
             return Ok(user);
         }
 
-        [HttpGet("{id}/Like/{likeId}")]
+        [HttpPost("{id}/Like/{likeId}")]
         public async Task<IActionResult> LikeUser(int id, int likeId)
         {
             if (id == likeId)
@@ -130,6 +136,64 @@ namespace Swiper.Server.Controllers
 
             await _context.SaveChangesAsync();
             return Ok(_mapper.Map<RelationshipDTO>(rel));
+        }
+
+        [HttpGet("{id}/Matches")]
+        public async Task<IActionResult> GetMatches(int id)
+        {
+            var list = _context.Relationships.Where(r => (r.UserA.Id == id || r.UserB.Id == id) && (r.ALikedB || r.BLikedA));
+
+            var matches = new List<User>();
+
+            foreach (var rel in list)
+            {
+                if(rel.UserA.Id == id)
+                {
+                    matches.Add(rel.UserB);
+                }
+                else
+                {
+                    matches.Add(rel.UserA);
+                }
+            }
+
+            return Ok(_mapper.Map<UserDTO>(matches));
+        }
+
+        [HttpPost("{id}/ProfilePicture")]
+        public async Task<IActionResult> UploadPfp(int id, IFormFile file)
+        {
+            if (file is null || file.Length == 0)
+            {
+                return BadRequest("No image uploaded!");
+            }
+
+            User? user;
+            using (var memoryStream = new MemoryStream())
+            {
+                file.CopyTo(memoryStream);
+                byte[] imageData = memoryStream.ToArray();
+
+                var image = new Image(imageData);
+
+                user = _context.Users.Find(id);
+                if (user is null)
+                {
+                    return BadRequest("User does not exist!");
+                }
+
+                if (user.Images is null)
+                {
+                    user.Images = new List<Image>();
+                }
+
+                user.Images.Add(image);
+            }
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return Ok(_mapper.Map<UserDTO>(user));
         }
     }
 }

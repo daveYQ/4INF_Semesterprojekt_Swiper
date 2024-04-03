@@ -11,6 +11,6 @@ namespace Swiper.Server.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public byte[]? Photo { get; set; }
+        public List<Image> Images { get; set; } 
     }
 }
