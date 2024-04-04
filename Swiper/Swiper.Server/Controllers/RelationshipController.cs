@@ -6,7 +6,7 @@ namespace Swiper.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class RelationshipController : Controller
+    public class RelationshipController : ControllerBase
     {
         private readonly UserContext _context;
         private readonly ILogger<UserController> _logger;
@@ -29,16 +29,15 @@ namespace Swiper.Server.Controllers
 
         //TODO: Request body as list of users (only 2 tho)
         [HttpPost("Create", Name = "Create")]
-        public async Task<IActionResult> Create(UserDTO userADTO, UserDTO userBDTO)
+        public async Task<IActionResult> Create(UserDTO userADTO)
         {
-            if(userADTO.Id is null || userBDTO is null) 
+            if(userADTO.Id is null ) 
             {
                 return BadRequest();
             }
 
             Relationship rel = new Relationship();
             rel.UserA = _context.Users.Find(userADTO.Id);
-            rel.UserB = _context.Users.Find(userBDTO.Id);
 
             _context.Relationships.Add(_mapper.Map<Relationship>(rel));
             await _context.SaveChangesAsync();

@@ -8,6 +8,6 @@ GET {{Swiper.Server_HostAddress}}/weatherforecast/testData/
 Accept: application/json
 ###
 
-GET {{Swiper.Server_HostAddress}}/user/
+GET {{Swiper.Server_HostAddress}}/2
 Accept: application/json
 ###
