@@ -8,7 +8,7 @@ namespace Swiper.Server.Models
         {
             this.CreateMap<User, UserDTO>();
             this.CreateMap<UserDTO, User>();
-            this.CreateMap<UserCreationDTO, User>()
+            this.CreateMap<UserCreationDTO, User>();
                //.ForMember(dest => dest.Password.Hash, opt => opt.MapFrom(src => src.Password));
 
             this.CreateMap<Relationship, RelationshipDTO>();

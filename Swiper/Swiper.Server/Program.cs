@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Swiper.Server.Models;
 
@@ -22,6 +23,10 @@ namespace Swiper.Server
                 options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SwiperDB;Trusted_Connection=True;"));
 
             builder.Services.AddAutoMapper(typeof(Program));
+
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<UserContext>()
+                .AddDefaultTokenProviders();
 
             var app = builder.Build();
 

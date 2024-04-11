@@ -1,5 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.EntityFrameworkCore;
 using Swiper.Server.Models;
 
@@ -7,17 +12,22 @@ namespace Swiper.Server.Controllers
 {
     //[ApiController]
     [Route("[controller]")]
+    [RequireHttps]
     public class UserController : ControllerBase
     {
         private readonly UserContext _context;
         private readonly ILogger<UserController> _logger;
         private readonly IMapper _mapper;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public UserController(ILogger<UserController> logger, UserContext context, IMapper mapper)
+
+        public UserController(ILogger<UserController> logger, UserContext context, IMapper mapper, Microsoft.AspNetCore.Identity.UserManager<User> userManager)
         {
             this._logger = logger;
             this._context = context;
             this._mapper = mapper;
+            this._userManager = userManager;
         }
 
         [HttpGet("/Health")]
@@ -67,28 +77,68 @@ namespace Swiper.Server.Controllers
             return Ok(_mapper.Map<UserDTO>(user));
         }
 
-        [HttpPost]
+        [HttpPost("Register")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromBody]UserCreationDTO userCreationDto)
+        public async Task<IActionResult> Register([FromBody] UserCreationDTO userCreationDto)
         {
             try
             {
                 User user = _mapper.Map<User>(userCreationDto);
+
+                var result = await _userManager.CreateAsync(user, userCreationDto.Password);
+
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignOutAsync();
+                    await _signInManager.SignInAsync(user, isPersistent: true);
+
+                    await _context.Users.AddAsync(_mapper.Map<User>(userCreationDto));
+                    await _context.SaveChangesAsync();
+
+                    return Ok(userCreationDto);
+                }
+
                 //TODO: Implement password hashing
 
-
-                await _context.Users.AddAsync(_mapper.Map<User>(userCreationDto));
-                await _context.SaveChangesAsync();
-                return Ok(userCreationDto);
+                return BadRequest("Bad");
             }
             catch
             {
-                return BadRequest();
+                return BadRequest("Req");
             }
         }
 
+        [HttpPost("LogIn/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogIn(int id, string password, bool rememberMe)
+        {
+            User? user = _context.Users.Find(id);
+
+            if (user is null)
+            {
+                return BadRequest("User not found!"); 
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(user, password, rememberMe, false);
+
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+
+            return BadRequest("Invalid Password");
+        }
+
+        [HttpPost("LogOff")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogOff()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok();
+        }
+
         [HttpPut]
-        public async Task<ActionResult> Edit([FromBody]UserDTO userDTO)
+        public async Task<ActionResult> Edit([FromBody] UserDTO userDTO)
         {
             User? user = _context.Users.Find(userDTO.Id);
 
@@ -103,7 +153,7 @@ namespace Swiper.Server.Controllers
             }
             if (userDTO.Email is not null)
             {
-                user.Email = userDTO.Email; 
+                user.Email = userDTO.Email;
             }
 
             _context.Entry(user).State = EntityState.Modified;
@@ -129,7 +179,7 @@ namespace Swiper.Server.Controllers
 
             Relationship? rel = _context.Relationships.Where(rel => rel.UserA.Id == id || rel.UserB.Id == id || rel.UserA.Id == likeId || rel.UserB.Id == likeId).FirstOrDefault();
 
-            if(rel is null)
+            if (rel is null)
             {
                 rel = new Relationship(userA, userB);
                 await _context.Relationships.AddAsync(rel);
@@ -157,7 +207,7 @@ namespace Swiper.Server.Controllers
 
             foreach (var rel in list)
             {
-                if(rel.UserA.Id == id)
+                if (rel.UserA.Id == id)
                 {
                     matches.Add(rel.UserB);
                 }
@@ -185,7 +235,7 @@ namespace Swiper.Server.Controllers
                 byte[] imageData = memoryStream.ToArray();
 
                 var image = new Image(imageData);
-                
+
                 user = _context.Users.Find(id);
                 if (user is null)
                 {
