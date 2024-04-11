@@ -29,13 +29,19 @@ namespace Swiper.Server.Controllers
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> Index()
         {
-            return Ok(_mapper.Map<IEnumerable<UserDTO>>(this._context.Users.ToList()));
+            return Ok(_mapper.Map<IEnumerable<UserDTO>>(
+                this._context.Users
+                .Include(user => user.Images)
+                .ToList()
+                ));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
-            User? user = _context.Users.Find(id);
+            User? user = await _context.Users
+                .Include(user => user.Images)
+                .FirstOrDefaultAsync(user => user.Id == id);
 
             if (user is null)
             {
@@ -67,6 +73,10 @@ namespace Swiper.Server.Controllers
         {
             try
             {
+                User user = _mapper.Map<User>(userCreationDto);
+                //TODO: Implement password hashing
+
+
                 await _context.Users.AddAsync(_mapper.Map<User>(userCreationDto));
                 await _context.SaveChangesAsync();
                 return Ok(userCreationDto);
@@ -175,7 +185,7 @@ namespace Swiper.Server.Controllers
                 byte[] imageData = memoryStream.ToArray();
 
                 var image = new Image(imageData);
-
+                
                 user = _context.Users.Find(id);
                 if (user is null)
                 {
@@ -192,6 +202,8 @@ namespace Swiper.Server.Controllers
 
             _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+
+            user = _context.Users.Find(user.Id);
 
             return Ok(_mapper.Map<UserDTO>(user));
         }
