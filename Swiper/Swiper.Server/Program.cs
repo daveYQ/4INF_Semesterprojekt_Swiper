@@ -25,8 +25,8 @@ namespace Swiper.Server
             builder.Services.AddAutoMapper(typeof(Program));
 
             builder.Services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<UserContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<UserContext>();
 
             var app = builder.Build();
 
