@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Swiper.Server.Models
 {
-    public class UserContext : DbContext
+    public class UserContext : IdentityDbContext<User>
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Relationship> Relationships { get; set; }

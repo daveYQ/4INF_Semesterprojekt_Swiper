@@ -28,6 +28,15 @@ namespace Swiper.Server
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<UserContext>();
 
+            builder.Services.AddAuthentication();
+            builder.Services.AddAuthorization();
+
+            builder.Services.Configure<IdentityOptions>(options =>
+
+            {
+                // Configure Customize password requirements, lockout settings, etc.
+            });
+
             var app = builder.Build();
 
             app.UseDefaultFiles();
