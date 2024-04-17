@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SwipeComponent } from './swipe/swipe.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { SwipeComponent } from './swipe/swipe.component';
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule, NgOptimizedImage
   ],
   providers: [],
   bootstrap: [AppComponent]
