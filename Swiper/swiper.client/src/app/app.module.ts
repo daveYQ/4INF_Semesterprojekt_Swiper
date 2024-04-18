@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SwipeComponent } from './swipe/swipe.component';
 import {NgOptimizedImage} from "@angular/common";
+import { ProfileViewComponent } from './profile-view/profile-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SwipeComponent
+    SwipeComponent,
+    ProfileViewComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

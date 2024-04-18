@@ -8,9 +8,5 @@ import {User} from "../User";
   styleUrl: './swipe.component.css'
 })
 export class SwipeComponent {
-  users: User[] = [];
 
-  constructor(userService :UserService) {
-    this.users = userService.getUsers();
-  }
 }

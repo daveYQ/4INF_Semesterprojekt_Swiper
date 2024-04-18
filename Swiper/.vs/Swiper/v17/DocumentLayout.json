@@ -74,8 +74,7 @@
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SwiperDB/True/SqlTable/dbo.Users.sql",
               "ToolTip": "dbo.Users [Daten]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-04-17T14:30:25.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-17T14:30:25.004Z"
             },
             {
               "$type": "Document",
@@ -111,8 +110,7 @@
               "RelativeToolTip": "Swiper.Server\\Models\\User.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T10:07:16.417Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-14T10:07:16.417Z"
             },
             {
               "$type": "Document",
@@ -185,8 +183,7 @@
               "RelativeToolTip": "Swiper.Server\\Models\\UserDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T10:09:47.394Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-14T10:09:47.394Z"
             },
             {
               "$type": "Document",

@@ -1,22 +1,14 @@
 <main>
   <div class="grid grid-rows-12">
+    <app-profile-view></app-profile-view>
 
-    <div id="bg-img" class="grid row-span-8 flex justify-center items-center bg-black">
-      <img class="col-start-1 row-start-1 bg-white" ngSrc="../../assets/woman.png" width="500" height="500">
-      <div class="col-start-1 row-start-1 bg-gradient-to-b from-transparent from-70% to-black" style="height: 100%; width: 100%;">
-      </div>
-    </div>
-
-    <div class="row-span-4 grid grid-rows-2 bg-black">
-      <span class="font-sans text-white text-3xl text-left lg:text-center">{{ users[0].name }}, {{ users[0].age }}</span>
-      <div>
-        <button class="rounded-full bg-gray-200 w-20 h-20 drop-shadow-lg shadow-white mr-2.5">
-          <img class="drop-shadow-md mx-auto" ngSrc="../../assets/x.png" width="50" height="50">
-        </button>
-        <button class="rounded-full bg-red-300 w-20 h-20 drop-shadow-lg shadow-white ml-2.5">
-          <img class="drop-shadow-md mx-auto" ngSrc="../../assets/heart.png" width="50" height="50">
-        </button>
-      </div>
+    <div class="bg-black">
+      <button class="rounded-full bg-gray-200 w-20 h-20 drop-shadow-lg shadow-white mr-2.5">
+        <img class="drop-shadow-md mx-auto" ngSrc="../../assets/x.png" width="50" height="50">
+      </button>
+      <button class="rounded-full bg-red-300 w-20 h-20 drop-shadow-lg shadow-white ml-2.5">
+        <img class="drop-shadow-md mx-auto" ngSrc="../../assets/heart.png" width="50" height="50">
+      </button>
     </div>
 
   </div>
