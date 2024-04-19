@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { SwipeComponent } from './swipe/swipe.component';
 import {NgOptimizedImage} from "@angular/common";
 import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
     BrowserModule, HttpClientModule,
     AppRoutingModule, NgOptimizedImage
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

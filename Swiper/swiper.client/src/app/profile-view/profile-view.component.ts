@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {User} from "../User";
 import {UserService} from "../user.service";
 import {Subject} from "rxjs";
@@ -21,9 +21,9 @@ export class ProfileViewComponent {
   public users: User[] = [];
   public index = 0;
   @Input()
-  parentSubject: Subject<any>;
+  parentSubject: Subject<any> = new Subject<any>();
 
-  animationState: string;
+  animationState: any;
 
   constructor(userService :UserService) {
     this.users = userService.getUsers();
@@ -35,13 +35,15 @@ export class ProfileViewComponent {
     });
   }
 
-  startAnimation(state) {
+  startAnimation(state: any) {
+    console.log("startani");
     if (!this.animationState) {
+      console.log("inani")
       this.animationState = state;
     }
   }
 
-  resetAnimationState(state) {
+  resetAnimationState(state: any) {
     this.animationState = '';
     this.index++;
   }

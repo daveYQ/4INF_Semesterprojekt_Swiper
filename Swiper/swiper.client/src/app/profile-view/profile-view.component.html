@@ -1,14 +1,11 @@
-<div id="bg-img" class="grid row-span-8 flex justify-center items-center bg-black" [@cardAnimator]="animationState"
+
+<div id="bg-img" class="grid row-span-8 flex justify-center items-center bg-black select-none bg-black pb-5" [@cardAnimator]="animationState"
      (@cardAnimator.done)="resetAnimationState($event)"
      (swipeleft)='startAnimation("swipeleft")'
      (swiperight)='startAnimation("swiperight")'>
-  <img class="col-start-1 row-start-1 bg-white" ngSrc="../../assets/woman.png" width="500" height="500">
+  <img class="col-start-1 row-start-1 bg-white" ngSrc="../../assets/woman.jpg" width="500" height="500" priority>
   <div class="col-start-1 row-start-1 bg-gradient-to-b from-transparent from-70% to-black" style="height: 100%; width: 100%;">
   </div>
+  <span class="grid-rows-2 font-sans text-white text-3xl text-left lg:text-center mt-5">{{ users[index].name }}, {{ users[index].age }}</span>
 </div>
 
-<div class="row-span-4 grid grid-rows-2 bg-black">
-  <span class="font-sans text-white text-3xl text-left lg:text-center mt-5">{{ users[index].name }}, {{ users[index].age }}</span>
-  <div>
-  </div>
-</div>
