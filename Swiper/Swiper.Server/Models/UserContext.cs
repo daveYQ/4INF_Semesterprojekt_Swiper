@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Swiper.Server.Models
 {
-    public class UserContext : IdentityDbContext<User>
+    public class UserContext : IdentityDbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Relationship> Relationships { get; set; }

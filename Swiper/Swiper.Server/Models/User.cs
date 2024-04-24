@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 namespace Swiper.Server.Models
 {
     [Table("AspNetUsers")]
-    public class User : Microsoft.AspNetCore.Identity.IdentityUser
+    public class User : IdentityUser
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
