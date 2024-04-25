@@ -316,17 +316,8 @@ C:\Users\User\Documents\Projekte\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Serve
 C:\Users\User\Documents\Projekte\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\User\Documents\Projekte\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\AutoMapper.dll
-C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\EntityFramework.SqlServer.dll
-C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\EntityFramework.dll
-C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Microsoft.AspNet.Identity.Core.dll
-C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Microsoft.AspNet.Identity.EntityFramework.dll
-C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Microsoft.AspNet.Identity.Owin.dll
 C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Microsoft.Owin.dll
 C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Microsoft.Owin.Host.SystemWeb.dll
-C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Microsoft.Owin.Security.dll
-C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Microsoft.Owin.Security.Cookies.dll
-C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Microsoft.Owin.Security.OAuth.dll
-C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Owin.dll
 C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\daada\Documents\Projects\4INF_Semesterprojekt_Swiper\Swiper\Swiper.Server\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
