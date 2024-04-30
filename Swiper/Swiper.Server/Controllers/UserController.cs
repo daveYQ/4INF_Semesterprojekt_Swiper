@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.HttpSys;
@@ -17,16 +15,17 @@ namespace Swiper.Server.Controllers
         private readonly UserContext _context;
         private readonly ILogger<UserController> _logger;
         private readonly IMapper _mapper;
-        private readonly Microsoft.AspNetCore.Identity.UserManager<User> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
 
-        public UserController(ILogger<UserController> logger, UserContext context, IMapper mapper, Microsoft.AspNetCore.Identity.UserManager<User> userManager)
+        public UserController(ILogger<UserController> logger, UserContext context, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this._logger = logger;
             this._context = context;
             this._mapper = mapper;
             this._userManager = userManager;
+            this._signInManager = signInManager;
         }
 
         [HttpGet("/Health")]
@@ -46,7 +45,7 @@ namespace Swiper.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById(int id)
+        public async Task<IActionResult> GetUserById(string id)
         {
             User? user = await _context.Users
                 .Include(user => user.Images)
@@ -77,7 +76,7 @@ namespace Swiper.Server.Controllers
         }
 
         [HttpPost("Register")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Register([FromBody] UserCreationDTO userCreationDto)
         {
             try
@@ -85,7 +84,7 @@ namespace Swiper.Server.Controllers
                 User user = _mapper.Map<User>(userCreationDto);
 
                 var result = await _userManager.CreateAsync(user, userCreationDto.Password);
-
+                
                 if (result.Succeeded)
                 {
                     await _signInManager.SignOutAsync();
@@ -99,7 +98,7 @@ namespace Swiper.Server.Controllers
 
                 //TODO: Implement password hashing
 
-                return BadRequest("Bad");
+                return BadRequest("Bad: " + result.Errors.ToString());
             }
             catch
             {
@@ -108,8 +107,8 @@ namespace Swiper.Server.Controllers
         }
 
         [HttpPost("LogIn/{id}")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogIn(int id, string password, bool rememberMe)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogIn(string id, string password, bool rememberMe)
         {
             User? user = _context.Users.Find(id);
 
@@ -129,26 +128,36 @@ namespace Swiper.Server.Controllers
         }
 
         [HttpPost("LogOff")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();
             return Ok();
         }
 
+        [HttpGet("LoggedIn")]
+        public async Task<IActionResult> IsLoggedIn()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Ok(true);
+            }
+            return BadRequest(false);
+        }
+
         [HttpPut]
         public async Task<ActionResult> Edit([FromBody] UserDTO userDTO)
         {
             User? user = _context.Users.Find(userDTO.Id);
-
+            
             if (user is null)
             {
                 return BadRequest("User not found");
             }
 
-            if (userDTO.Name is not null)
+            if (userDTO.UserName is not null)
             {
-                user.Name = userDTO.Name;
+                user.UserName = userDTO.UserName;
             }
             if (userDTO.Email is not null)
             {
@@ -161,8 +170,51 @@ namespace Swiper.Server.Controllers
             return Ok(user);
         }
 
-        [HttpPost("{id}/Like/{likeId}")]
-        public async Task<IActionResult> LikeUser(int id, int likeId)
+        [HttpPost("Like/{id}")]
+        public async Task<IActionResult> Like(string id)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return BadRequest("User is not Autenticated!");
+            }
+
+            User? user = await _userManager.GetUserAsync(User);
+
+            if (user.Id == id)
+            {
+                return BadRequest("Users cannot like themselves.");
+            }
+
+            User? likedUser = await _context.Users.FindAsync(id);
+            if (likedUser is null)
+            {
+                return BadRequest("User not found");
+            }
+            
+            Relationship? rel = _context.Relationships.Where(rel => rel.UserA.Id == id || rel.UserB.Id == id || rel.UserA.Id == likedUser.Id || rel.UserB.Id == likedUser.Id).FirstOrDefault();
+
+            if (rel is null)
+            {
+                rel = new Relationship(user, likedUser);
+                await _context.Relationships.AddAsync(rel);
+            }
+
+            if (id == rel.UserA.Id)
+            {
+                rel.ALikedB = true;
+            }
+            else
+            {
+                rel.BLikedA = true;
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok(_mapper.Map<RelationshipDTO>(rel));
+
+        }
+
+        /*[HttpPost("{id}/Like/{likeId}")]
+        public async Task<IActionResult> LikeUser(string id, string likeId)
         {
             if (id == likeId)
             {
@@ -195,10 +247,10 @@ namespace Swiper.Server.Controllers
 
             await _context.SaveChangesAsync();
             return Ok(_mapper.Map<RelationshipDTO>(rel));
-        }
+        }*/
 
         [HttpGet("{id}/Matches")]
-        public async Task<IActionResult> GetMatches(int id)
+        public async Task<IActionResult> GetMatches(string id)
         {
             var list = _context.Relationships.Where(r => (r.UserA.Id == id || r.UserB.Id == id) && (r.ALikedB || r.BLikedA));
 
