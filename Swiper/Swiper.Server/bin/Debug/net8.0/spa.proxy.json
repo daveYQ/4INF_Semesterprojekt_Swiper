@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:4200",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\..\\swiper.client",
+"WorkingDirectory": "C:\\Users\\daada\\Documents\\Projects\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\..\\swiper.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }
