@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Swiper.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,6 +31,7 @@ namespace Swiper.Server.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -49,6 +50,11 @@ namespace Swiper.Server.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -176,32 +182,6 @@ namespace Swiper.Server.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Relationships",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserAId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UserBId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ALikedB = table.Column<bool>(type: "bit", nullable: false),
-                    BLikedA = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Relationships", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Relationships_AspNetUsers_UserAId",
-                        column: x => x.UserAId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Relationships_AspNetUsers_UserBId",
-                        column: x => x.UserBId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -235,6 +215,11 @@ namespace Swiper.Server.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_UserId",
+                table: "AspNetUsers",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -245,16 +230,6 @@ namespace Swiper.Server.Migrations
                 name: "IX_Image_UserId",
                 table: "Image",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Relationships_UserAId",
-                table: "Relationships",
-                column: "UserAId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Relationships_UserBId",
-                table: "Relationships",
-                column: "UserBId");
         }
 
         /// <inheritdoc />
@@ -277,9 +252,6 @@ namespace Swiper.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "Image");
-
-            migrationBuilder.DropTable(
-                name: "Relationships");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

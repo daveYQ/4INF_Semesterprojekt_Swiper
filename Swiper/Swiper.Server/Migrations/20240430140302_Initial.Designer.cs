@@ -7,14 +7,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Swiper.Server.DBContexts;
 
-
 #nullable disable
 
 namespace Swiper.Server.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20240430113326_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240430140302_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,38 +254,14 @@ namespace Swiper.Server.Migrations
                     b.ToTable("Image");
                 });
 
-            modelBuilder.Entity("Swiper.Server.Models.Relationship", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("ALikedB")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("BLikedA")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserAId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserBId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserAId");
-
-                    b.HasIndex("UserBId");
-
-                    b.ToTable("Relationships");
-                });
-
             modelBuilder.Entity("Swiper.Server.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasIndex("UserId");
 
                     b.HasDiscriminator().HasValue("User");
                 });
@@ -349,24 +324,18 @@ namespace Swiper.Server.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Swiper.Server.Models.Relationship", b =>
+            modelBuilder.Entity("Swiper.Server.Models.User", b =>
                 {
-                    b.HasOne("Swiper.Server.Models.User", "UserA")
-                        .WithMany()
-                        .HasForeignKey("UserAId");
-
-                    b.HasOne("Swiper.Server.Models.User", "UserB")
-                        .WithMany()
-                        .HasForeignKey("UserBId");
-
-                    b.Navigation("UserA");
-
-                    b.Navigation("UserB");
+                    b.HasOne("Swiper.Server.Models.User", null)
+                        .WithMany("LikedUsers")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Swiper.Server.Models.User", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("LikedUsers");
                 });
 #pragma warning restore 612, 618
         }

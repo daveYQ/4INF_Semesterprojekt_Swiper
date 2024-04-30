@@ -44,7 +44,7 @@ namespace Swiper.Server.Controllers
                 .ToList()
                 ));*/
 
-            return Ok(_mapper.Map<IEnumerable<UserDTO>>(this._userManager.Users.Include(user => user.Images)));
+            return Ok(_mapper.Map<IEnumerable<UserDTO>>(this._userManager.Users.Include(user => user.Images).ToList()));
         }
 
         [HttpGet("{id}")]
@@ -84,6 +84,11 @@ namespace Swiper.Server.Controllers
         public async Task<IActionResult> DeleteAll()
         {
             var users = _context.Users;
+
+            foreach(var user in users)
+            {
+                user.Images = null;
+            }
 
             _context.RemoveRange(users);
             await _context.SaveChangesAsync();
@@ -158,10 +163,10 @@ namespace Swiper.Server.Controllers
             return BadRequest(false);
         }
 
-        [HttpPost]
+        [HttpPost("Like")]
         public async Task<IActionResult> Like(string id)
         {
-            if ((User is not null) && User.Identity.IsAuthenticated)
+            if ((User is not null) && !User.Identity.IsAuthenticated)
             {
                 return BadRequest("User is not logged in");
             }
@@ -174,9 +179,10 @@ namespace Swiper.Server.Controllers
             }
 
             User? user = await _userManager.GetUserAsync(User);
-            if (user is null)
+
+            if (user == target)
             {
-                return BadRequest("User is not logged in!");
+                return BadRequest("User cannot like themselves!");
             }
 
             if (user.LikedUsers is null)
@@ -184,7 +190,14 @@ namespace Swiper.Server.Controllers
                 user.LikedUsers = new List<User>();
             }
 
+            if (user.LikedUsers.Contains(target))
+            {
+                return BadRequest("User is already liked!");
+            }
+
             user.LikedUsers.Add(target);
+
+            await _userManager.UpdateAsync(user);
 
             return Ok("User is liked now.");
         }
@@ -215,7 +228,6 @@ namespace Swiper.Server.Controllers
             {
                 if (target.LikedUsers is null)
                 {
-                    target.LikedUsers = new List<User>();
                     continue;
                 }
 
@@ -259,8 +271,6 @@ namespace Swiper.Server.Controllers
             }
 
             await _userManager.UpdateAsync(user);
-            _context.Entry(user).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
 
             user = await _userManager.FindByIdAsync(user.Id);
 
