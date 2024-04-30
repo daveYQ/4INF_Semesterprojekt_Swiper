@@ -10,5 +10,6 @@ namespace Swiper.Server.Models
         //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         //public int Id { get; set; }
         public List<Image> Images { get; set; } 
+        public List<User> LikedUsers { get; set; } 
     }
 }

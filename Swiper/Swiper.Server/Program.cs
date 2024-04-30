@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Swiper.Server.DBContexts;
 using Swiper.Server.Models;
 
 namespace Swiper.Server

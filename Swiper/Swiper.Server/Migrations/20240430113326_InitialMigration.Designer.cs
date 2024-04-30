@@ -5,15 +5,16 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Swiper.Server.Models;
+using Swiper.Server.DBContexts;
+
 
 #nullable disable
 
 namespace Swiper.Server.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20240425185247_saofdij")]
-    partial class saofdij
+    [Migration("20240430113326_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -286,10 +287,6 @@ namespace Swiper.Server.Migrations
             modelBuilder.Entity("Swiper.Server.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("User");
                 });

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.EntityFrameworkCore;
+using Swiper.Server.DBContexts;
 using Swiper.Server.Models;
 
 namespace Swiper.Server.Controllers
@@ -37,20 +38,19 @@ namespace Swiper.Server.Controllers
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> Index()
         {
-            return Ok(_mapper.Map<IEnumerable<UserDTO>>(
+            /*return Ok(_mapper.Map<IEnumerable<UserDTO>>(
                 this._context.Users
                 .Include(user => user.Images)
                 .ToList()
-                ));
+                ));*/
+
+            return Ok(_mapper.Map<IEnumerable<UserDTO>>(this._userManager.Users.Include(user => user.Images)));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(string id)
         {
-            User? user = await _context.Users
-                .Include(user => user.Images)
-                .FirstOrDefaultAsync(user => user.Id == id);
-
+            User? user = await _userManager.FindByIdAsync(id);
             if (user is null)
             {
                 return BadRequest("User not found.");
@@ -60,7 +60,7 @@ namespace Swiper.Server.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             User? user = _context.Users.Find(id);
 
@@ -68,11 +68,29 @@ namespace Swiper.Server.Controllers
             {
                 return BadRequest("User not found.");
             }
+            ;
+            if (user == (await _userManager.GetUserAsync(User)))
+            {
+                await _signInManager.SignOutAsync();
+            }
 
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
             return Ok(_mapper.Map<UserDTO>(user));
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAll()
+        {
+            var users = _context.Users;
+
+            _context.RemoveRange(users);
+            await _context.SaveChangesAsync();
+
+            await _signInManager.SignOutAsync();
+
+            return Ok("All users deleted!");
         }
 
         [HttpPost("Register")]
@@ -84,19 +102,14 @@ namespace Swiper.Server.Controllers
                 User user = _mapper.Map<User>(userCreationDto);
 
                 var result = await _userManager.CreateAsync(user, userCreationDto.Password);
-                
+
                 if (result.Succeeded)
                 {
                     await _signInManager.SignOutAsync();
                     await _signInManager.SignInAsync(user, isPersistent: true);
 
-                    await _context.Users.AddAsync(_mapper.Map<User>(userCreationDto));
-                    await _context.SaveChangesAsync();
-
                     return Ok(userCreationDto);
                 }
-
-                //TODO: Implement password hashing
 
                 return BadRequest("Bad: " + result.Errors.ToString());
             }
@@ -110,11 +123,11 @@ namespace Swiper.Server.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> LogIn(string id, string password, bool rememberMe)
         {
-            User? user = _context.Users.Find(id);
+            User? user = await _userManager.FindByIdAsync(id);
 
             if (user is null)
             {
-                return BadRequest("User not found!"); 
+                return BadRequest("User not found!");
             }
 
             var result = await _signInManager.PasswordSignInAsync(user, password, rememberMe, false);
@@ -138,141 +151,85 @@ namespace Swiper.Server.Controllers
         [HttpGet("LoggedIn")]
         public async Task<IActionResult> IsLoggedIn()
         {
-            if (User.Identity.IsAuthenticated)
+            if ((User is not null) && User.Identity.IsAuthenticated)
             {
                 return Ok(true);
             }
             return BadRequest(false);
         }
 
-        [HttpPut]
-        public async Task<ActionResult> Edit([FromBody] UserDTO userDTO)
-        {
-            User? user = _context.Users.Find(userDTO.Id);
-            
-            if (user is null)
-            {
-                return BadRequest("User not found");
-            }
-
-            if (userDTO.UserName is not null)
-            {
-                user.UserName = userDTO.UserName;
-            }
-            if (userDTO.Email is not null)
-            {
-                user.Email = userDTO.Email;
-            }
-
-            _context.Entry(user).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return Ok(user);
-        }
-
-        [HttpPost("Like/{id}")]
+        [HttpPost]
         public async Task<IActionResult> Like(string id)
         {
-            if (!User.Identity.IsAuthenticated)
+            if ((User is not null) && User.Identity.IsAuthenticated)
             {
-                return BadRequest("User is not Autenticated!");
+                return BadRequest("User is not logged in");
+            }
+
+            User? target = await _userManager.FindByIdAsync(id);
+
+            if (target is null)
+            {
+                return BadRequest("Target does not exist!");
             }
 
             User? user = await _userManager.GetUserAsync(User);
-
-            if (user.Id == id)
+            if (user is null)
             {
-                return BadRequest("Users cannot like themselves.");
+                return BadRequest("User is not logged in!");
             }
 
-            User? likedUser = await _context.Users.FindAsync(id);
-            if (likedUser is null)
+            if (user.LikedUsers is null)
             {
-                return BadRequest("User not found");
-            }
-            
-            Relationship? rel = _context.Relationships.Where(rel => rel.UserA.Id == id || rel.UserB.Id == id || rel.UserA.Id == likedUser.Id || rel.UserB.Id == likedUser.Id).FirstOrDefault();
-
-            if (rel is null)
-            {
-                rel = new Relationship(user, likedUser);
-                await _context.Relationships.AddAsync(rel);
+                user.LikedUsers = new List<User>();
             }
 
-            if (id == rel.UserA.Id)
-            {
-                rel.ALikedB = true;
-            }
-            else
-            {
-                rel.BLikedA = true;
-            }
+            user.LikedUsers.Add(target);
 
-            await _context.SaveChangesAsync();
-            return Ok(_mapper.Map<RelationshipDTO>(rel));
-
+            return Ok("User is liked now.");
         }
-
-        /*[HttpPost("{id}/Like/{likeId}")]
-        public async Task<IActionResult> LikeUser(string id, string likeId)
-        {
-            if (id == likeId)
-            {
-                return BadRequest("Users cannot like themselves.");
-            }
-
-            User? userA = await _context.Users.FindAsync(id);
-            User? userB = await _context.Users.FindAsync(likeId);
-            if (userA is null || userB is null)
-            {
-                return BadRequest("User not found");
-            }
-
-            Relationship? rel = _context.Relationships.Where(rel => rel.UserA.Id == id || rel.UserB.Id == id || rel.UserA.Id == likeId || rel.UserB.Id == likeId).FirstOrDefault();
-
-            if (rel is null)
-            {
-                rel = new Relationship(userA, userB);
-                await _context.Relationships.AddAsync(rel);
-            }
-
-            if (id == rel.UserA.Id)
-            {
-                rel.ALikedB = true;
-            }
-            else
-            {
-                rel.BLikedA = true;
-            }
-
-            await _context.SaveChangesAsync();
-            return Ok(_mapper.Map<RelationshipDTO>(rel));
-        }*/
 
         [HttpGet("{id}/Matches")]
-        public async Task<IActionResult> GetMatches(string id)
+        public async Task<IActionResult> GetMatches()
         {
-            var list = _context.Relationships.Where(r => (r.UserA.Id == id || r.UserB.Id == id) && (r.ALikedB || r.BLikedA));
-
-            var matches = new List<User>();
-
-            foreach (var rel in list)
+            if ((User is not null) && User.Identity.IsAuthenticated)
             {
-                if (rel.UserA.Id == id)
+                return BadRequest("User is not logged in");
+            }
+
+            User? user = await _userManager.GetUserAsync(User);
+            if (user is null)
+            {
+                return BadRequest("User is not logged in!");
+            }
+
+            if (user.LikedUsers is null)
+            {
+                user.LikedUsers = new List<User>();
+                return Ok(user.LikedUsers);
+            }
+
+            List<User> matches = new();
+
+            foreach (User target in user.LikedUsers)
+            {
+                if (target.LikedUsers is null)
                 {
-                    matches.Add(rel.UserB);
+                    target.LikedUsers = new List<User>();
+                    continue;
                 }
-                else
+
+                if (target.LikedUsers.Contains(user))
                 {
-                    matches.Add(rel.UserA);
+                    matches.Add(target);
                 }
             }
 
-            return Ok(_mapper.Map<UserDTO>(matches));
+            return Ok(matches);
         }
 
-        [HttpPost("{id}/ProfilePicture")]
-        public async Task<IActionResult> UploadPfp(int id, IFormFile file)
+        [HttpPost("ProfilePicture")]
+        public async Task<IActionResult> UploadPfp(IFormFile file)
         {
             if (file is null || file.Length == 0)
             {
@@ -287,10 +244,10 @@ namespace Swiper.Server.Controllers
 
                 var image = new Image(imageData);
 
-                user = _context.Users.Find(id);
+                user = await _userManager.GetUserAsync(User);
                 if (user is null)
                 {
-                    return BadRequest("User does not exist!");
+                    return BadRequest("User is not logged in!");
                 }
 
                 if (user.Images is null)
@@ -301,10 +258,11 @@ namespace Swiper.Server.Controllers
                 user.Images.Add(image);
             }
 
+            await _userManager.UpdateAsync(user);
             _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            user = _context.Users.Find(user.Id);
+            user = await _userManager.FindByIdAsync(user.Id);
 
             return Ok(_mapper.Map<UserDTO>(user));
         }
