@@ -102,6 +102,11 @@ namespace Swiper.Server.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Register([FromBody] UserCreationDTO userCreationDto)
         {
+            if ((User is not null) && User.Identity.IsAuthenticated)
+            {
+                return BadRequest("User is logged in.");
+            }
+
             try
             {
                 User user = _mapper.Map<User>(userCreationDto);
@@ -139,7 +144,7 @@ namespace Swiper.Server.Controllers
 
             if (result.Succeeded)
             {
-                return Ok();
+                return Ok("User is now logged in!");
             }
 
             return BadRequest("Invalid Password");
@@ -153,14 +158,14 @@ namespace Swiper.Server.Controllers
             return Ok();
         }
 
-        [HttpGet("LoggedIn")]
+        [HttpGet("ID")]
         public async Task<IActionResult> IsLoggedIn()
         {
             if ((User is not null) && User.Identity.IsAuthenticated)
             {
-                return Ok(true);
+                return Ok((await _userManager.GetUserAsync(User)).Id);
             }
-            return BadRequest(false);
+            return BadRequest();
         }
 
         [HttpPost("Like")]
@@ -202,10 +207,10 @@ namespace Swiper.Server.Controllers
             return Ok("User is liked now.");
         }
 
-        [HttpGet("{id}/Matches")]
+        [HttpGet("Matches")]
         public async Task<IActionResult> GetMatches()
         {
-            if ((User is not null) && User.Identity.IsAuthenticated)
+            if ((User is not null) && !User.Identity.IsAuthenticated)
             {
                 return BadRequest("User is not logged in");
             }
@@ -219,6 +224,7 @@ namespace Swiper.Server.Controllers
             if (user.LikedUsers is null)
             {
                 user.LikedUsers = new List<User>();
+                await _userManager.UpdateAsync(user);
                 return Ok(user.LikedUsers);
             }
 

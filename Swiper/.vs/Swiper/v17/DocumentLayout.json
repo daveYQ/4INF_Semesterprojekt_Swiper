@@ -3,16 +3,27 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Migrations\\20240430140302_Initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Swiper.Server\\Migrations\\20240430140302_Initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Migrations\\20240502085324_AddedMatches.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Swiper.Server\\Migrations\\20240502085324_AddedMatches.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SwiperDB/True/SqlTable/dbo.AspNetUsers.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\migrations\\20240430140302_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\migrations\\20240430140302_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Migrations\\20240430133142_AddedLikedUsers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +36,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\models\\mappingprofiles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\models\\mappingprofiles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\swiper.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -84,24 +91,47 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "20240502085324_AddedMatches.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Migrations\\20240502085324_AddedMatches.cs",
+              "RelativeDocumentMoniker": "Swiper.Server\\Migrations\\20240502085324_AddedMatches.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Migrations\\20240502085324_AddedMatches.cs",
+              "RelativeToolTip": "Swiper.Server\\Migrations\\20240502085324_AddedMatches.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T08:53:24.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "dbo.AspNetUsers [Daten]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SwiperDB/True/SqlTable/dbo.AspNetUsers.sql",
+              "ToolTip": "dbo.AspNetUsers [Daten]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-05-02T08:37:20.354Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "20240430140302_Initial.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Migrations\\20240430140302_Initial.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Migrations\\20240430140302_Initial.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Migrations\\20240430140302_Initial.cs",
               "RelativeToolTip": "Swiper.Server\\Migrations\\20240430140302_Initial.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAARAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-30T14:03:02.836Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "20240430133142_AddedLikedUsers.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Migrations\\20240430133142_AddedLikedUsers.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Migrations\\20240430133142_AddedLikedUsers.cs",
@@ -109,12 +139,11 @@
               "RelativeToolTip": "Swiper.Server\\Migrations\\20240430133142_AddedLikedUsers.cs",
               "ViewState": "AQIAACoAAAAAAAAAAAAowAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T13:31:42.845Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-30T13:31:42.845Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Swiper.Server.csproj",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Swiper.Server.csproj",
               "RelativeDocumentMoniker": "Swiper.Server\\Swiper.Server.csproj",
@@ -126,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "SQLQuery3.sql ",
               "DocumentMoniker": "C:\\Users\\User\\AppData\\Local\\Temp\\jbr0qdvj..sql",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\Temp\\jbr0qdvj..sql",
@@ -136,7 +165,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "20240425092202_InitialMigration.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Migrations\\20240425092202_InitialMigration.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Migrations\\20240425092202_InitialMigration.cs",
@@ -147,7 +176,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "20240425091613_Initialize.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Migrations\\20240425091613_Initialize.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Migrations\\20240425091613_Initialize.cs",
@@ -158,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "SQLQuery2.sql ",
               "DocumentMoniker": "C:\\Users\\User\\AppData\\Local\\Temp\\gb1pte1g..sql",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\Temp\\gb1pte1g..sql",
@@ -168,7 +197,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "20240425090648_dfdwfsdfaf.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Migrations\\20240425090648_dfdwfsdfaf.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Migrations\\20240425090648_dfdwfsdfaf.cs",
@@ -179,7 +208,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "Image.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Models\\Image.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Models\\Image.cs",
@@ -191,7 +220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "UserCreationDTO.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Models\\UserCreationDTO.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Models\\UserCreationDTO.cs",
@@ -203,32 +232,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Models\\User.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Models\\User.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Models\\User.cs",
               "RelativeToolTip": "Swiper.Server\\Models\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAzAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T10:07:16.417Z"
+              "WhenOpened": "2024-03-14T10:07:16.417Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Controllers\\UserController.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Controllers\\UserController.cs",
               "RelativeToolTip": "Swiper.Server\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAFUAAAAAAAAAAAAiwGkAAAANAAAA",
+              "ViewState": "AQIAAMUAAAAAAAAAAAAswNcAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-12T08:48:00.731Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "UserContext.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\DBContexts\\UserContext.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\DBContexts\\UserContext.cs",
@@ -236,12 +266,11 @@
               "RelativeToolTip": "Swiper.Server\\DBContexts\\UserContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T09:52:14.559Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-18T09:52:14.559Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "MappingProfiles.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Models\\MappingProfiles.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Models\\MappingProfiles.cs",
@@ -249,12 +278,11 @@
               "RelativeToolTip": "Swiper.Server\\Models\\MappingProfiles.cs",
               "ViewState": "AQIAAAEAAAAAAAAAAAAQwAsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T12:03:06.469Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-14T12:03:06.469Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "UserDTO.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Models\\UserDTO.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Models\\UserDTO.cs",
@@ -266,7 +294,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "app.component.html",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\swiper.client\\src\\app\\app.component.html",
               "RelativeDocumentMoniker": "swiper.client\\src\\app\\app.component.html",
@@ -278,7 +306,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Program.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Program.cs",
@@ -286,12 +314,11 @@
               "RelativeToolTip": "Swiper.Server\\Program.cs",
               "ViewState": "AQIAAC8AAAAAAAAAAAAUwD0AAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-07T10:09:49.719Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-07T10:09:49.719Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "WeatherForecast.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\WeatherForecast.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\WeatherForecast.cs",
@@ -303,7 +330,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "Swiper.Server.http",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Swiper.Server.http",
               "RelativeDocumentMoniker": "Swiper.Server\\Swiper.Server.http",
