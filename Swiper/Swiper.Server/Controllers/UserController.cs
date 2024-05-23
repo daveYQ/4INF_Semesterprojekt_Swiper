@@ -215,7 +215,8 @@ namespace Swiper.Server.Controllers
                 return BadRequest("User is not logged in");
             }
 
-            User? user = await _userManager.GetUserAsync(User);
+            //User? user = await _userManager.GetUserAsync(User);
+            User? user = this._userManager.Users.Include(user => user.LikedUsers).ToListAsync().Result.Find(u => User.Identity.Name == u.UserName);
             if (user is null)
             {
                 return BadRequest("User is not logged in!");
@@ -243,7 +244,7 @@ namespace Swiper.Server.Controllers
                 }
             }
 
-            return Ok(matches);
+            return Ok(_mapper.Map<List<UserDTO>>(matches));
         }
 
         [HttpPost("ProfilePicture")]
