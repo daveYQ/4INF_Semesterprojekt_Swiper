@@ -1,0 +1,26 @@
+{{- for dto in data.Classes | Symbols.WhereNamespaceStartsWith "Swiper.Server" | Symbols.WhereNameEndsWith "DTO"
+        capture output
+-}}
+
+{{~  for dependency in dto | Type.AllReferencedTypes }}
+import { {{ dependency.BareName }} } from "{{ dependency.FullName }}";
+{{- end }}
+
+export class {{ dto.Name }} {{- if dto.HasBaseClass }} extends {{ dto.BaseClass.Name; end }}
+{ 
+{{- for prop in dto.Properties }}
+    {{ prop.Name | String.ToCamelCase }}: {{ prop.Type | Type.ToTypeScriptType }};   
+{{- end }}
+
+    constructor()
+    {
+    {{  if dto.HasBaseClass }}    super(); {{-end }}
+    {{- for prop in dto.Properties }}
+        this.{{ prop.Name | String.ToCamelCase }} = {{ prop.Type | Type.ToTypeScriptDefault }};
+    {{- end }}
+    }
+}
+{{-     end
+   Save output ("generatedTypes/" + dto.FullName + ".tsx")
+   end 
+}}
