@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {User} from "../User";
-import {UserService} from "../user.service";
+import {UserService} from "../services/user.service";
 import {Subject} from "rxjs";
 import {animate, keyframes, transition, trigger} from "@angular/animations";
 import * as kf from './keyframes';

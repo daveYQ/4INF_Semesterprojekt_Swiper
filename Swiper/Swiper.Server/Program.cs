@@ -12,6 +12,19 @@ namespace Swiper.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var allowAngular = "allowAngular";
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: allowAngular,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("https://localhost:4200")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                                  });
+            });
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -42,6 +55,7 @@ namespace Swiper.Server
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseCors(allowAngular);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

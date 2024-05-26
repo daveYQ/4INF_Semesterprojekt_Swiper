@@ -12,8 +12,8 @@ using Swiper.Server.DBContexts;
 namespace Swiper.Server.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20240502085324_AddedMatches")]
-    partial class AddedMatches
+    [Migration("20240526120751_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -257,6 +257,12 @@ namespace Swiper.Server.Migrations
             modelBuilder.Entity("Swiper.Server.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Residence")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");

@@ -1,5 +1,17 @@
-<nav class="text-4xl text-center font-bold bg-pink-600">
-Swiper
+<nav class="text-4xl text-center font-bold bg-pink-600 flex justify-between">
+  <div class="w-max justify-self-start">
+    asfghjk
+  </div>
+
+  <a routerLink="/" class="w-max">Swiper</a>
+
+  <button mat-button [matMenuTriggerFor]="dropdown" class="w-max"><mat-icon fontIcon="menu"></mat-icon></button>
+
+  <mat-menu #dropdown="matMenu" class="flex flex-col">
+    <a mat-menu-item routerLink="/login">Login</a>
+    <a mat-menu-item (click)="logout()">Log Out</a>
+    <a mat-menu-item routerLink="/register">Register</a>
+  </mat-menu>
 </nav>
 
 <router-outlet class="p-0 h-dvh"/>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Swiper.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66e1e0508a82e39e062fc0cc6d882a36133d884e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86c2d8881927653cd370d5b50f73b7c9b79ed170")]
 [assembly: System.Reflection.AssemblyProductAttribute("Swiper.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Swiper.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -27,6 +27,44 @@ namespace Swiper.Server.Controllers
             this._mapper = mapper;
             this._userManager = userManager;
             this._signInManager = signInManager;
+
+            InitializeDB();
+        }
+
+        private async Task InitializeDB()
+        {
+            var users = _context.Users;
+
+            foreach (var user in users)
+            {
+                user.Images = null;
+            }
+
+            _context.RemoveRange(users);
+            _context.SaveChanges();
+
+            _signInManager.SignOutAsync().Wait();
+
+            User user1 = new User()
+            {
+                UserName = "User1",
+                Email = "user1@mail.com",
+            };
+            User user2 = new User()
+            {
+                UserName = "User2",
+                Email = "user2@mail.com",
+            };
+            User user3 = new User()
+            {
+                UserName = "User3",
+                Email = "user3@mail.com",
+            };
+
+            _userManager.CreateAsync(user1, "ABCabc123!").Wait();
+            _userManager.CreateAsync(user2, "ABCabc123!").Wait();
+            _userManager.CreateAsync(user3, "ABCabc123!").Wait();
+
         }
 
         [HttpGet("/Health")]
@@ -54,7 +92,7 @@ namespace Swiper.Server.Controllers
             if (user is null)
             {
                 return BadRequest("User not found.");
-            }
+            } 
 
             return Ok(_mapper.Map<UserDTO>(user));
         }
@@ -129,15 +167,15 @@ namespace Swiper.Server.Controllers
             }
         }
 
-        [HttpPost("LogIn/{id}")]
+        [HttpPost("LogIn")]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogIn(string id, string password, bool rememberMe)
+        public async Task<IActionResult> LogIn(string email, string password, bool rememberMe)
         {
-            User? user = await _userManager.FindByIdAsync(id);
+            User? user = await _userManager.FindByEmailAsync(email);
 
             if (user is null)
             {
-                return BadRequest("User not found!");
+                return NotFound("User not found!"); //NotFound()
             }
 
             var result = await _signInManager.PasswordSignInAsync(user, password, rememberMe, false);
@@ -147,7 +185,7 @@ namespace Swiper.Server.Controllers
                 return Ok("User is now logged in!");
             }
 
-            return BadRequest("Invalid Password");
+            return BadRequest("Either email or password is invalid");
         }
 
         [HttpPost("LogOff")]
@@ -158,14 +196,14 @@ namespace Swiper.Server.Controllers
             return Ok();
         }
 
-        [HttpGet("ID")]
+        [HttpGet("CurrentUser")]
         public async Task<IActionResult> IsLoggedIn()
         {
             if ((User is not null) && User.Identity.IsAuthenticated)
             {
-                return Ok((await _userManager.GetUserAsync(User)).Id);
+                return Ok(_mapper.Map<UserDTO>(await _userManager.GetUserAsync(User)));
             }
-            return BadRequest();
+            return Ok();
         }
 
         [HttpPost("Like")]

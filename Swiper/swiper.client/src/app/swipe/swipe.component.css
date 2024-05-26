@@ -29,11 +29,8 @@
 }
 .tinder--card {
   display: inline-block;
-  width: 260px;
   height: 70%;
-  background: #fff;
-  padding-bottom: 40px;
-  border-radius: 8px;
+  top: 150px;
   overflow: hidden;
   position: absolute;
   will-change: transform;
@@ -57,13 +54,7 @@
   width: 100px;
   margin-left: -50px;
 }
-.tinder--card img {
-  max-width: 100%;
-  max-height: 75%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
+
 .tinder--card h3 {
   margin-top: 16px;
   font-size: 24px;

@@ -4,7 +4,7 @@ GET {{Swiper.Server_HostAddress}}/weatherforecast/
 Accept: application/json
 ###
 
-GET {{Swiper.Server_HostAddress}}/weatherforecast/testData/
+GET {{Swiper.Server_HostAddress}}/register
 Accept: application/json
 ###
 

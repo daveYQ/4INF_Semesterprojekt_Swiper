@@ -1,7 +1,8 @@
 import { Component, Input, ViewChildren, QueryList, ElementRef, EventEmitter, Output, Renderer2 } from '@angular/core';
-import {UserService} from "../user.service";
+import {UserService} from "../services/user.service";
 import {User} from "../User";
 import {Subject} from "rxjs";
+import {UserDTO} from "../../generatedTypes/UserDTO";
 //https://stackblitz.com/edit/ionic-4-template-czmv63?file=src%2Fapp%2Ftinder-ui-component%2Ftinder-ui.component.html
 @Component({
   selector: 'app-swipe',
@@ -9,7 +10,7 @@ import {Subject} from "rxjs";
   styleUrl: './swipe.component.css'
 })
 export class SwipeComponent {
-  users: User[];
+  users: UserDTO[];
 
   @ViewChildren('tinderCard') tinderCards: QueryList<ElementRef>;
   tinderCardsArray: Array<ElementRef>;
@@ -23,7 +24,10 @@ export class SwipeComponent {
   crossVisible: boolean;
 
   constructor(private renderer: Renderer2, userService: UserService) {
-    this.users = userService.getUsers()
+    userService.getAllUsers().then((res) => {
+      this.users = res;
+      console.log(this.users);
+    })
   }
 
   userClickedButton(event, heart) {

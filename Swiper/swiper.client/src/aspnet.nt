@@ -25,5 +25,5 @@ module App {
     angular.module("App").service("{{class.Name | String.Replace "Controller" "Service"}}", ["$http", {{class.Name}}]);
 }
 {{-    end
-   Save output "generatedTypes/" + class.BareName + ".ts"
+   Save output class.BareName + ".ts"
    end }}

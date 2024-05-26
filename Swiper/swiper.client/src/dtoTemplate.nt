@@ -3,7 +3,7 @@
 -}}
 
 {{~  for dependency in dto | Type.AllReferencedTypes }}
-import { {{ dependency.BareName }} } from "{{ dependency.FullName }}";
+import { {{ dependency.BareName }} } from "./{{ dependency.BareName }}";
 {{- end }}
 
 export class {{ dto.Name }} {{- if dto.HasBaseClass }} extends {{ dto.BaseClass.Name; end }}
@@ -12,15 +12,15 @@ export class {{ dto.Name }} {{- if dto.HasBaseClass }} extends {{ dto.BaseClass.
     {{ prop.Name | String.ToCamelCase }}: {{ prop.Type | Type.ToTypeScriptType }};   
 {{- end }}
 
-    constructor()
+    constructor({{- for prop in dto.Properties }}{{ prop.Name | String.ToCamelCase }}?: {{ prop.Type | Type.ToTypeScriptType }},{{- end }})
     {
     {{  if dto.HasBaseClass }}    super(); {{-end }}
     {{- for prop in dto.Properties }}
-        this.{{ prop.Name | String.ToCamelCase }} = {{ prop.Type | Type.ToTypeScriptDefault }};
+        this.{{ prop.Name | String.ToCamelCase }} = {{prop.Name | String.ToCamelCase }} ?? {{ prop.Type | Type.ToTypeScriptDefault }};
     {{- end }}
     }
 }
 {{-     end
-   Save output ("generatedTypes/" + dto.FullName + ".tsx")
+   Save output ("generatedTypes/" + dto.BareName + ".ts")
    end 
 }}
