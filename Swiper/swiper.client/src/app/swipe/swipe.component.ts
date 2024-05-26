@@ -24,7 +24,7 @@ export class SwipeComponent {
   crossVisible: boolean;
 
   constructor(private renderer: Renderer2, userService: UserService) {
-    userService.getAllUsers().then((res) => {
+    userService.getAllUsers().subscribe((res) => {
       this.users = res;
       console.log(this.users);
     })

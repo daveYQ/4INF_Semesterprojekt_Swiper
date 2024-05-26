@@ -23,17 +23,8 @@ export class UserService {
     return this.users;
   }
 
-  async getAllUsers(): Promise<UserDTO[]> {
-    console.log("yay");
-
-    try {
-      const users = await firstValueFrom(this.http.get<UserDTO[]>(this.url + '/User'));
-      console.info(users);
-      return users;
-    } catch (error) {
-      console.error(error);
-      throw error; // Or handle the error appropriately
-    }
+  getAllUsers() {
+      return this.http.get<UserDTO[]>(this.url + '/User')
   }
 
   async login(user: UserDTO, options?: any)
