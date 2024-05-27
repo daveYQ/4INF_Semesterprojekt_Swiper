@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.EntityFrameworkCore;
 using Swiper.Server.DBContexts;
 using Swiper.Server.Models;
+using System.Security.Claims;
 
 namespace Swiper.Server.Controllers
 {
@@ -73,6 +76,7 @@ namespace Swiper.Server.Controllers
             return Ok("Up");
         }
 
+        [Authorize]
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> Index()
         {
@@ -92,7 +96,7 @@ namespace Swiper.Server.Controllers
             if (user is null)
             {
                 return BadRequest("User not found.");
-            } 
+            }
 
             return Ok(_mapper.Map<UserDTO>(user));
         }
@@ -123,7 +127,7 @@ namespace Swiper.Server.Controllers
         {
             var users = _context.Users;
 
-            foreach(var user in users)
+            foreach (var user in users)
             {
                 user.Images = null;
             }
@@ -177,6 +181,20 @@ namespace Swiper.Server.Controllers
             {
                 return NotFound("User not found!"); //NotFound()
             }
+
+            if (!await _userManager.CheckPasswordAsync(user, password))
+            {
+                return BadRequest();
+            }
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
 
             var result = await _signInManager.PasswordSignInAsync(user, password, rememberMe, false);
 
