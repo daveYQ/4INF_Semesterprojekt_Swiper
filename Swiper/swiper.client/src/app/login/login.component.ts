@@ -7,6 +7,7 @@ import {merge} from 'rxjs';
 import {UserService} from "../services/user.service";
 import {UserCreationDTO} from "../../generatedTypes/UserCreationDTO";
 import {UserDTO} from "../../generatedTypes/UserDTO";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,10 +17,8 @@ export class LoginComponent {
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   errorMessage: string;
-  userService: UserService;
 
-  constructor(userService: UserService) {
-    this.userService = userService;
+  constructor(private userService: UserService, private router: Router) {
   }
 
   updateErrorMessage() {
@@ -36,9 +35,13 @@ export class LoginComponent {
       let email = this.email.value;
       let password = this.password.value;
 
-      let user = new UserDTO(email, password);
+      let res = this.userService.login(email, password);
 
-      let req = this.userService.login(user);
+      res.then(user =>
+      {
+        console.log(user);
+        this.router.navigate(['/'])
+      });
 
       //console.log(req.subscribe());
   }

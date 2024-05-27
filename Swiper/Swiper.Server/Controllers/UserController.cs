@@ -142,7 +142,7 @@ namespace Swiper.Server.Controllers
         {
             if ((User is not null) && User.Identity.IsAuthenticated)
             {
-                return BadRequest("User is logged in.");
+                return Unauthorized("User is logged in.");
             }
 
             try
@@ -182,7 +182,7 @@ namespace Swiper.Server.Controllers
 
             if (result.Succeeded)
             {
-                return Ok("User is now logged in!");
+                return Ok(user);
             }
 
             return BadRequest("Either email or password is invalid");
@@ -211,7 +211,7 @@ namespace Swiper.Server.Controllers
         {
             if ((User is not null) && !User.Identity.IsAuthenticated)
             {
-                return BadRequest("User is not logged in");
+                return Unauthorized("User is not logged in");
             }
 
             User? target = await _userManager.FindByIdAsync(id);
@@ -250,7 +250,7 @@ namespace Swiper.Server.Controllers
         {
             if ((User is not null) && !User.Identity.IsAuthenticated)
             {
-                return BadRequest("User is not logged in");
+                return Unauthorized("User is not logged in");
             }
 
             //User? user = await _userManager.GetUserAsync(User);

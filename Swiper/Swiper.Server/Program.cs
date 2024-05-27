@@ -21,9 +21,23 @@ namespace Swiper.Server
                                   {
                                       policy.WithOrigins("https://localhost:4200")
                                         .AllowAnyHeader()
-                                        .AllowAnyMethod();
+                                        .AllowAnyMethod()
+                                        .AllowCredentials();
                                   });
             });
+
+            builder.Services.AddAuthentication("CookieUserAuth")
+                .AddCookie("CookieUserAuth", options =>
+                {
+                    options.Cookie.Name = "CookieUserAuth";
+                    options.LoginPath = "/Account/Login";
+                    options.LogoutPath = "/Account/Logout";
+                    options.AccessDeniedPath = "/Account/AccessDenied";
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                });
+
+            builder.Services.AddAuthorization();
 
             // Add services to the container.
 
