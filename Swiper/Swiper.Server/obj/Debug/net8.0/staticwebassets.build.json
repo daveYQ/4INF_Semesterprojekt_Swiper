@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "k/GKMd8Z8yuU9i8LZc3Q0ZmRAfJbEvTT+VJFWorfJ20=",
+  "Hash": "YaH/kCcCn9WcwT/GHvrKNH7BZovvL3T1NTtw5+8RAnw=",
   "Source": "Swiper.Server",
   "BasePath": "_content/Swiper.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\daada\\Documents\\Projects\\4INF_Semesterprojekt_Swiper\\Swiper\\swiper.client\\swiper.client.esproj",
+      "Identity": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\swiper.client\\swiper.client.esproj",
       "Version": 2,
       "Source": "swiper.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {User} from "../User";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/common/http";
 import {UserCreationDTO} from "../../generatedTypes/UserCreationDTO";
-import {catchError, firstValueFrom, throwError} from "rxjs";
+import {catchError, firstValueFrom, map, throwError} from "rxjs";
 import {UserDTO} from "../../generatedTypes/UserDTO";
 
 @Injectable({
@@ -27,15 +27,38 @@ export class UserService {
       return this.http.get<UserDTO[]>(this.url + '/User')
   }
 
-  async login(user: UserDTO, options?: any)
-  {
-    console.log(user);
-    return this.http.post(this.url + "/User/Login", user, options).pipe(
-      catchError((error) => {
-        console.error('Error fetching data:', error);
-        return throwError(() => error);
-      })
-    );
+  async login(email: string, password: string, options?: any) {
+    console.log('email:', email);
+    console.log('pwd:', password);
+
+    // Create the body of the POST request
+    const body = {
+    };
+
+    // Set headers if necessary
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    let opts =
+      {
+        params: new HttpParams()
+          .set('email', email)
+          .set('password', password)
+          .set('rememberMe', true),
+        withCredentials: true
+      };
+
+    // Merge headers with options if provided
+    const requestOptions = {
+      headers: headers,
+      ...opts
+    };
+
+    console.log(body);
+    let user = firstValueFrom(this.http.post<UserDTO>(this.url + '/User/LogIn', body, requestOptions));
+
+    return user;
   }
 
   async register(user: UserCreationDTO, options?: any)
