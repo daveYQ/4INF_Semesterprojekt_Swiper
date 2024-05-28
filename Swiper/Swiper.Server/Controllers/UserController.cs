@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -184,7 +185,7 @@ namespace Swiper.Server.Controllers
 
             if (!await _userManager.CheckPasswordAsync(user, password))
             {
-                return BadRequest();
+                return BadRequest("Invalid Password!");
             }
 
             var claims = new List<Claim>
@@ -196,14 +197,10 @@ namespace Swiper.Server.Controllers
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
 
-            var result = await _signInManager.PasswordSignInAsync(user, password, rememberMe, false);
+            //var result = await _signInManager.PasswordSignInAsync(user, password, rememberMe, false);
+            await _signInManager.SignInWithClaimsAsync(user, new AuthenticationProperties { IsPersistent = true }, claims);
 
-            if (result.Succeeded)
-            {
-                return Ok(user);
-            }
-
-            return BadRequest("Either email or password is invalid");
+            return Ok(_mapper.Map<UserDTO>(user));
         }
 
         [HttpPost("LogOff")]
