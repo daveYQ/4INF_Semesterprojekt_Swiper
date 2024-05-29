@@ -30,9 +30,12 @@ namespace Swiper.Server
                 .AddCookie("CookieUserAuth", options =>
                 {
                     options.Cookie.Name = "CookieUserAuth";
-                    options.LoginPath = "/Account/Login";
+                    options.Cookie.HttpOnly = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                    /*options.LoginPath = "/Account/Login";
                     options.LogoutPath = "/Account/Logout";
                     options.AccessDeniedPath = "/Account/AccessDenied";
+                    */
                     options.Cookie.HttpOnly = true;
                     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 });

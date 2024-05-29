@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA7D105F-22BD-4136-8843-713C45EC235B}|Swiper.Server\\Swiper.Server.csproj|solutionrelative:swiper.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FA2F05AD-3C8F-4C3D-B837-5FB66A721E37}|swiper.client\\swiper.client.esproj|c:\\users\\user\\documents\\projekte\\4inf_semesterprojekt_swiper\\swiper\\swiper.client\\src\\app\\app.component.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
@@ -91,7 +91,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
@@ -101,9 +101,10 @@
               "RelativeDocumentMoniker": "swiper.client\\src\\app\\app.component.spec.ts",
               "ToolTip": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\swiper.client\\src\\app\\app.component.spec.ts",
               "RelativeToolTip": "swiper.client\\src\\app\\app.component.spec.ts",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAAAAoAAAAbAAAA",
+              "ViewState": "AQIAAAcAAAAAAAAAAIBJwAoAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2024-05-27T09:56:02.263Z"
+              "WhenOpened": "2024-05-27T09:56:02.263Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -115,17 +116,18 @@
               "RelativeToolTip": "Swiper.Server\\Models\\UserDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T10:09:47.394Z"
+              "WhenOpened": "2024-03-14T10:09:47.394Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Controllers\\UserController.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Controllers\\UserController.cs",
               "RelativeToolTip": "Swiper.Server\\Controllers\\UserController.cs",
-              "ViewState": "AQIAALUAAAAAAAAAAAAQwL0AAAAAAAAA",
+              "ViewState": "AQIAALsAAAAAAAAAAAAMwNkAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-12T08:48:00.731Z",
               "EditorCaption": ""
@@ -184,13 +186,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Program.cs",
               "RelativeDocumentMoniker": "Swiper.Server\\Program.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\Projekte\\4INF_Semesterprojekt_Swiper\\Swiper\\Swiper.Server\\Program.cs",
               "RelativeToolTip": "Swiper.Server\\Program.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAgwB8AAAA7AAAA",
+              "ViewState": "AQIAACIAAAAAAAAAAAAgwCkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-07T10:09:49.719Z",
               "EditorCaption": ""
@@ -205,7 +207,8 @@
               "RelativeToolTip": "Swiper.Server\\Models\\UserCreationDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-21T10:12:57.166Z"
+              "WhenOpened": "2024-03-21T10:12:57.166Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -217,7 +220,8 @@
               "RelativeToolTip": "Swiper.Server\\Models\\Image.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T13:45:09.032Z"
+              "WhenOpened": "2024-04-03T13:45:09.032Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -272,7 +276,8 @@
               "RelativeToolTip": "Swiper.Server\\Models\\User.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T10:07:16.417Z"
+              "WhenOpened": "2024-03-14T10:07:16.417Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -284,7 +289,8 @@
               "RelativeToolTip": "Swiper.Server\\DBContexts\\UserContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T09:52:14.559Z"
+              "WhenOpened": "2024-03-18T09:52:14.559Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -296,7 +302,8 @@
               "RelativeToolTip": "Swiper.Server\\Models\\MappingProfiles.cs",
               "ViewState": "AQIAAAEAAAAAAAAAAAAQwAsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T12:03:06.469Z"
+              "WhenOpened": "2024-03-14T12:03:06.469Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -308,7 +315,8 @@
               "RelativeToolTip": "swiper.client\\src\\app\\app.component.html",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2024-03-08T09:04:49.991Z"
+              "WhenOpened": "2024-03-08T09:04:49.991Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -320,7 +328,8 @@
               "RelativeToolTip": "Swiper.Server\\WeatherForecast.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-07T10:20:32.918Z"
+              "WhenOpened": "2024-03-07T10:20:32.918Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -332,7 +341,8 @@
               "RelativeToolTip": "Swiper.Server\\Swiper.Server.http",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-03-07T10:00:55.745Z"
+              "WhenOpened": "2024-03-07T10:00:55.745Z",
+              "EditorCaption": ""
             }
           ]
         }

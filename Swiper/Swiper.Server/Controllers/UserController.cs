@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using Swiper.Server.DBContexts;
 using Swiper.Server.Models;
 using System.Security.Claims;
@@ -77,7 +78,7 @@ namespace Swiper.Server.Controllers
             return Ok("Up");
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> Index()
         {
@@ -190,8 +191,8 @@ namespace Swiper.Server.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.UserName)
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -216,6 +217,7 @@ namespace Swiper.Server.Controllers
         {
             if ((User is not null) && User.Identity.IsAuthenticated)
             {
+                var user = await _userManager.GetUserAsync(User);
                 return Ok(_mapper.Map<UserDTO>(await _userManager.GetUserAsync(User)));
             }
             return Ok();
