@@ -73,8 +73,13 @@ export class UserService {
   }
 
   async getCurrent(): Promise<UserDTO> {
+    let opts =
+      {
+        withCredentials: true
+      };
+
     try {
-      const user = await firstValueFrom(this.http.get<UserDTO>(this.url + '/User/CurrentUser'));
+      const user = await firstValueFrom(this.http.get<UserDTO>(this.url + '/User/CurrentUser', opts));
       console.info(user);
       return user;
     } catch (error) {

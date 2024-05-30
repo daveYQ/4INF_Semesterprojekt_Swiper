@@ -33,7 +33,7 @@ namespace Swiper.Server.Controllers
             this._userManager = userManager;
             this._signInManager = signInManager;
 
-            InitializeDB();
+            InitializeDB().Wait();
         }
 
         private async Task InitializeDB()
@@ -66,9 +66,10 @@ namespace Swiper.Server.Controllers
                 Email = "user3@mail.com",
             };
 
-            _userManager.CreateAsync(user1, "ABCabc123!").Wait();
-            _userManager.CreateAsync(user2, "ABCabc123!").Wait();
-            _userManager.CreateAsync(user3, "ABCabc123!").Wait();
+            var res = await _userManager.CreateAsync(user1, "ABCabc123!");
+            await Console.Out.WriteLineAsync(res.Succeeded + "");
+            await _userManager.CreateAsync(user2, "ABCabc123!");
+            await _userManager.CreateAsync(user3, "ABCabc123!");
 
         }
 
@@ -82,12 +83,6 @@ namespace Swiper.Server.Controllers
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> Index()
         {
-            /*return Ok(_mapper.Map<IEnumerable<UserDTO>>(
-                this._context.Users
-                .Include(user => user.Images)
-                .ToList()
-                ));*/
-
             return Ok(_mapper.Map<IEnumerable<UserDTO>>(this._userManager.Users.Include(user => user.Images).ToList()));
         }
 
@@ -184,22 +179,13 @@ namespace Swiper.Server.Controllers
                 return NotFound("User not found!"); //NotFound()
             }
 
-            if (!await _userManager.CheckPasswordAsync(user, password))
+            await _signInManager.SignOutAsync();
+            var result = await _signInManager.PasswordSignInAsync(user, password, rememberMe, false);
+
+            if (!result.Succeeded)
             {
-                return BadRequest("Invalid Password!");
+                return BadRequest();
             }
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.UserName)
-            };
-
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-
-            //var result = await _signInManager.PasswordSignInAsync(user, password, rememberMe, false);
-            await _signInManager.SignInWithClaimsAsync(user, new AuthenticationProperties { IsPersistent = true }, claims);
 
             return Ok(_mapper.Map<UserDTO>(user));
         }
@@ -218,9 +204,9 @@ namespace Swiper.Server.Controllers
             if ((User is not null) && User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.GetUserAsync(User);
-                return Ok(_mapper.Map<UserDTO>(await _userManager.GetUserAsync(User)));
+                return Ok(_mapper.Map<UserDTO>(user));
             }
-            return Ok();
+            return BadRequest();
         }
 
         [HttpPost("Like")]

@@ -26,19 +26,26 @@ namespace Swiper.Server
                                   });
             });
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.SameSite = SameSiteMode.None;
+                options.ExpireTimeSpan = TimeSpan.FromDays(5);
+                options.SlidingExpiration = true;
+            });
+
+            /*
             builder.Services.AddAuthentication("CookieUserAuth")
                 .AddCookie("CookieUserAuth", options =>
                 {
                     options.Cookie.Name = "CookieUserAuth";
                     options.Cookie.HttpOnly = true;
                     options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                    /*options.LoginPath = "/Account/Login";
-                    options.LogoutPath = "/Account/Logout";
-                    options.AccessDeniedPath = "/Account/AccessDenied";
-                    */
                     options.Cookie.HttpOnly = true;
                     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 });
+            */
 
             builder.Services.AddAuthorization();
 
@@ -62,13 +69,27 @@ namespace Swiper.Server
             builder.Services.AddAuthentication();
             builder.Services.AddAuthorization();
 
+            /*
             builder.Services.Configure<IdentityOptions>(options =>
-
             {
                 // Configure Customize password requirements, lockout settings, etc.
             });
+            */
 
             var app = builder.Build();
+
+            // Configure middleware pipeline
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+
+            app.UseRouting();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
@@ -82,14 +103,11 @@ namespace Swiper.Server
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
+            app.UseAuthentication();
 
             app.MapControllers();
-
             app.MapFallbackToFile("/index.html");
-
             app.Run();
         }
     }
