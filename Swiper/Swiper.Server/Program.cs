@@ -26,14 +26,14 @@ namespace Swiper.Server
                                   });
             });
 
-            builder.Services.ConfigureApplicationCookie(options =>
+            /*builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                options.Cookie.SameSite = SameSiteMode.None;
+                //options.Cookie.SameSite = SameSiteMode.Unspecified;
                 options.ExpireTimeSpan = TimeSpan.FromDays(5);
                 options.SlidingExpiration = true;
-            });
+            });*/
 
             /*
             builder.Services.AddAuthentication("CookieUserAuth")
@@ -46,8 +46,6 @@ namespace Swiper.Server
                     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 });
             */
-
-            builder.Services.AddAuthorization();
 
             // Add services to the container.
 
@@ -69,17 +67,19 @@ namespace Swiper.Server
             builder.Services.AddAuthentication();
             builder.Services.AddAuthorization();
 
-            /*
+            
             builder.Services.Configure<IdentityOptions>(options =>
             {
-                // Configure Customize password requirements, lockout settings, etc.
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+/ ";
+                options.User.RequireUniqueEmail = true;
+
             });
-            */
+            
 
             var app = builder.Build();
 
             // Configure middleware pipeline
-            if (app.Environment.IsDevelopment())
+            /*if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -87,9 +87,9 @@ namespace Swiper.Server
             {
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
-            }
+            }*/
 
-            app.UseRouting();
+            //app.UseRouting();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

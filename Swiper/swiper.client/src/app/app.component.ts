@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   }
 
   logout(){
-    this.userService.logout().then(r => console.log(r));
+    this.userService.logout().then();
+    window.location.reload();
   }
 }

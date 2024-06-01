@@ -9,6 +9,8 @@ namespace Swiper.Server.Models
             this.CreateMap<User, UserDTO>();
             this.CreateMap<UserDTO, User>();
             this.CreateMap<UserCreationDTO, User>();
+            this.CreateMap<Image, ImageDTO>();
+            this.CreateMap<ImageDTO, Image>();
         }
     }
 }

@@ -1,19 +1,12 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using Swiper.Server.DBContexts;
 using Swiper.Server.Models;
-using System.Security.Claims;
 
 namespace Swiper.Server.Controllers
 {
-    //[ApiController]
     [Route("[controller]")]
     [RequireHttps]
     public class UserController : ControllerBase
@@ -33,7 +26,7 @@ namespace Swiper.Server.Controllers
             this._userManager = userManager;
             this._signInManager = signInManager;
 
-            InitializeDB().Wait();
+            //InitializeDB().Wait();
         }
 
         private async Task InitializeDB()
@@ -160,7 +153,14 @@ namespace Swiper.Server.Controllers
                     return Ok(userCreationDto);
                 }
 
-                return BadRequest("Bad: " + result.Errors.ToString());
+                string err = "";
+
+                foreach(var error in result.Errors)
+                {
+                    err += error.Description + Environment.NewLine;
+                }
+
+                return BadRequest(err);
             }
             catch
             {
@@ -176,10 +176,10 @@ namespace Swiper.Server.Controllers
 
             if (user is null)
             {
-                return NotFound("User not found!"); //NotFound()
+                return NotFound("User not found!");
             }
 
-            await _signInManager.SignOutAsync();
+            //await _signInManager.SignOutAsync();
             var result = await _signInManager.PasswordSignInAsync(user, password, rememberMe, false);
 
             if (!result.Succeeded)
@@ -199,14 +199,16 @@ namespace Swiper.Server.Controllers
         }
 
         [HttpGet("CurrentUser")]
-        public async Task<IActionResult> IsLoggedIn()
+        public async Task<IActionResult> IsLoggedIn() 
         {
             if ((User is not null) && User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.GetUserAsync(User);
-                return Ok(_mapper.Map<UserDTO>(user));
+                //Workaround
+                var user2 = await _context.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefaultAsync();
+                return Ok(_mapper.Map<UserDTO>(user2));
             }
-            return BadRequest();
+            return Ok();
         }
 
         [HttpPost("Like")]

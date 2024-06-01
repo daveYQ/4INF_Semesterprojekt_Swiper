@@ -26,7 +26,7 @@
       <div (pan)="handlePan($event)" (panend)="handlePanEnd($event)" #tinderCard class="tinder--card bg-white" (transitionend)="handleShift()" *ngFor="let user of users; let i = index"
            [ngStyle]="{ zIndex: users.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 20 * i + 'px)' }">
 
-        <img ngSrc="assets/woman.jpg" height="512" width="512">
+        <img *ngIf="user.images.length > 0" [ngSrc]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' + user.images[0].data)" height="512" width="512">
         <h3>{{ user.userName }}</h3>
         <p>{{ user.age }}</p>
       </div>

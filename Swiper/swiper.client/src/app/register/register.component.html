@@ -4,28 +4,24 @@
       <mat-card-title class="text-center w-full text-2xl">Register</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form class="space-y-4" (ngSubmit) = "onClickSubmit()">
+      <form class="space-y-4" [formGroup]="registerForm" (ngSubmit)="onClickSubmit()">
         <mat-form-field class="w-full" appearance="fill">
-          <mat-label>Username</mat-label>
-          <input matInput type="username" name="username" required placeholder="Username" [formControl]="username">
+          <mat-label>Name</mat-label>
+          <input matInput type="username" formControlName="username" name="username" required placeholder="Name">
+          <mat-error *ngIf="username.errors && username.touched">Invalid name!</mat-error>
         </mat-form-field>
         <mat-form-field class="w-full" appearance="fill">
           <mat-label>Email</mat-label>
-          <input matInput type="email" name="email" required placeholder="Email" [formControl]="email" (blur)="updateErrorMessage()">
-          @if (email.invalid) {
-            <mat-error>{{errorMessage}}</mat-error>
-          }
+          <input matInput type="email" formControlName="email" name="email" required placeholder="example@mail.com" (blur)="updateErrorMessage()">
+          <mat-error *ngIf="email.errors && email.touched || !email.valid">Invalid email!</mat-error>
         </mat-form-field>
         <mat-form-field class="w-full" appearance="fill">
           <mat-label>Password</mat-label>
-          <input matInput type="password" name="password" required placeholder="Password" [formControl]="password">
-          @if (email.invalid) {
-            <mat-error>Invalid Password! (min 8 symbols)</mat-error>
-          }
+          <input matInput type="password" formControlName="password" name="password" required placeholder="Safe Password">
+          <mat-error *ngIf="password.errors && password.touched">Invalid Password! (min 8 symbols containing letters, numbers and special characters)</mat-error>
         </mat-form-field>
-        <div class="flex justify-end">
-          <button mat-raised-button color="primary" class="w-full">Login</button>
-        </div>
+          <button class="flex justify-end w-full" type="submit" mat-raised-button color="primary">Login</button>
+        <mat-error>{{apiError}}</mat-error>
       </form>
       <a routerLink="/login" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Already have an account?</a>
     </mat-card-content>

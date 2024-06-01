@@ -64,12 +64,7 @@ export class UserService {
   async register(user: UserCreationDTO, options?: any)
   {
     console.log(user);
-    return this.http.post(this.url + "/User/Register", user, options).pipe(
-      catchError((error) => {
-        console.error('Error fetching data:', error);
-        return throwError(() => error);
-      })
-    );
+    return await firstValueFrom(this.http.post(this.url + "/User/Register", user, options));
   }
 
   async getCurrent(): Promise<UserDTO> {
@@ -89,12 +84,29 @@ export class UserService {
   }
 
   async logout() {
+    let opts =
+      {
+        withCredentials: true
+      };
+
     try {
-      await firstValueFrom(this.http.post(this.url + '/User/LogOff', {}));
+      await firstValueFrom(this.http.post(this.url + '/User/LogOff', {}, opts));
       console.info("Logged out");
     } catch (error) {
       console.error(error);
       throw error; // Or handle the error appropriately
     }
+  }
+
+  uploadImg(file: File)
+  {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    return this.http.post(this.url + "/User/ProfilePicture", formData, {
+      reportProgress: true,
+      observe: 'events',
+      withCredentials: true
+    });
   }
 }

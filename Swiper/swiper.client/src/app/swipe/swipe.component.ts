@@ -1,15 +1,16 @@
-import { Component, Input, ViewChildren, QueryList, ElementRef, EventEmitter, Output, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, EventEmitter, Output, Renderer2 } from '@angular/core';
 import {UserService} from "../services/user.service";
 import {User} from "../User";
 import {Subject} from "rxjs";
 import {UserDTO} from "../../generatedTypes/UserDTO";
+import {DomSanitizer} from "@angular/platform-browser";
 //https://stackblitz.com/edit/ionic-4-template-czmv63?file=src%2Fapp%2Ftinder-ui-component%2Ftinder-ui.component.html
 @Component({
   selector: 'app-swipe',
   templateUrl: './swipe.component.html',
   styleUrl: './swipe.component.css'
 })
-export class SwipeComponent {
+export class SwipeComponent implements OnInit{
   users: UserDTO[];
 
   @ViewChildren('tinderCard') tinderCards: QueryList<ElementRef>;
@@ -23,11 +24,16 @@ export class SwipeComponent {
   heartVisible: boolean;
   crossVisible: boolean;
 
-  constructor(private renderer: Renderer2, userService: UserService) {
-    userService.getAllUsers().subscribe((res) => {
+  constructor(private renderer: Renderer2, private userService: UserService, protected sanitizer: DomSanitizer) {
+  }
+
+  ngOnInit(){
+    this.userService.getAllUsers().subscribe((res) => {
       this.users = res;
       console.log(this.users);
     })
+
+
   }
 
   userClickedButton(event, heart) {

@@ -20,6 +20,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterOutlet} from "@angular/router";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
+import {MatProgressBar} from "@angular/material/progress-bar";
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -32,28 +34,30 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppComponent,
     SwipeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        RouterOutlet,
-        AppRoutingModule,
-        NgOptimizedImage,
-        MatInputModule,
-        MatButtonModule,
-        MatCardModule,
-        MatError,
-        MatFormFieldModule,  // Ensure this is imported
-        MatIconModule,       // Optionally, if you use icons
-        ReactiveFormsModule,
-        MatMenu,
-        MatMenuTrigger,
-        HttpClientModule,
-        FormsModule,
-        MatMenuItem,
-        // Ensure this is imported
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    RouterOutlet,
+    AppRoutingModule,
+    NgOptimizedImage,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatError,
+    MatFormFieldModule,  // Ensure this is imported
+    MatIconModule,       // Optionally, if you use icons
+    ReactiveFormsModule,
+    MatMenu,
+    MatMenuTrigger,
+    HttpClientModule,
+    FormsModule,
+    MatMenuItem,
+    MatProgressBar,
+    // Ensure this is imported
+  ],
   providers: [
     provideAnimationsAsync()
   ],
