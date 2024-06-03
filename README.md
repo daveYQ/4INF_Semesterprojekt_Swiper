@@ -497,7 +497,7 @@ classDiagram
     User "1" -- "*" User : likes
 ```
 
-### DTOs:
+### Klassendiagramme DTOs:
 ```mermaid
 classDiagram
     class UserCreationDTO {
@@ -533,6 +533,115 @@ classDiagram
 
     UserDTO "1" --> "*" ImageDTO : contains
     UserModDTO "1" --> "*" ImageDTO : contains
+```
+
+### Objektdiagram Testdaten:
+```mermaid
+classDiagram
+    class User {
+        UserName: string
+        Email: string
+        Residence: string
+        Age: int
+    }
+
+    class Dave {
+        UserName = "Dave"
+        Email = "user1@mail.com"
+        Residence = "Saalfelden"
+        Age = 18
+    }
+
+    class User2 {
+        UserName = "User2"
+        Email = "user2@mail.com"
+        Residence = "Salzburg"
+        Age = 22
+    }
+
+    class Patrick {
+        UserName = "Patrick the Sexiest Sexist"
+        Email = "user3@mail.com"
+        Residence = "Voglau"
+        Age = 18
+    }
+
+    class Moderator {
+        UserName = "Moderator"
+        Email = "moderator@mail.com"
+        Residence = "Fugging"
+        Age = 35
+    }
+
+    class Administrator {
+        UserName = "Administrator"
+        Email = "administrator@mail.com"
+        Residence = "Golling"
+        Age = 60
+    }
+
+    class Berni {
+        UserName = "Berni"
+        Email = "bernhard.pirchner@mail.com"
+        Residence = "Niedernfritz City"
+        Age = 18
+    }
+
+    class Zylla {
+        UserName = "Zylla"
+        Email = "tobias.ziller@mail.com"
+        Residence = "Annaberg"
+        Age = 18
+    }
+```
+
+### Login-Sequenzdiagramm:
+```mermaid
+sequenceDiagram
+    participant User
+    participant LoginPage
+    participant Server
+    participant Database
+
+    User->>LoginPage: Open Login Page
+    LoginPage->>User: Display Login Form
+    User->>LoginPage: Enter Credentials (email, password)
+    LoginPage->>Server: Send Credentials
+    Server->>Database: Validate Credentials
+    alt Credentials Valid
+        Database-->>Server: Credentials Valid
+        Server-->>LoginPage: Authentication Success
+        LoginPage-->>User: Redirect to Swipe-Page
+    else Credentials Invalid
+        Database-->>Server: Credentials Invalid
+        Server-->>LoginPage: Authentication Failure
+        LoginPage-->>User: Display Error Message
+    end
+```
+
+### Registrierung-Sequenzdiagramm:
+```mermaid
+sequenceDiagram
+    participant User
+    participant RegisterPage
+    participant Server
+    participant Database
+
+    User->>RegisterPage: Open Registration Page
+    RegisterPage->>User: Display Registration Form
+    User->>RegisterPage: Enter Registration Details (username, email, password)
+    RegisterPage->>Server: Send Registration Details
+    Server->>Database: Check if Email Exists
+    alt Email Exists
+        Database-->>Server: Email Exists
+        Server-->>RegisterPage: Registration Failure
+        RegisterPage-->>User: Display Email Already Exists Message
+    else Registration Success
+        Database-->>Server: Email Not Exists
+        Server->>Database: Save User Details
+        Server-->>RegisterPage: Registration Success
+        RegisterPage-->>User: Display Success Message
+    end
 ```
 
 ## Diskussion der Ergebnisse
