@@ -30,7 +30,6 @@ export class SwipeComponent implements OnInit, AfterViewInit{
   ngOnInit(){
     this.userService.getAllUsers().subscribe((res) => {
       this.users = res;
-      console.log(this.users);
     })
 
 
@@ -76,7 +75,6 @@ export class SwipeComponent implements OnInit, AfterViewInit{
   };
 
   handlePanEnd(event) {
-    console.log("Panevent")
     this.toggleChoiceIndicator(false,false);
 
     if (!this.users.length) return;

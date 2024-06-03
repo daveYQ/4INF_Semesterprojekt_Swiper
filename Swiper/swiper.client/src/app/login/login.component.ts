@@ -52,20 +52,16 @@ export class LoginComponent implements OnInit{
 
       res.then(user =>
       {
-        console.log(user);
         this.router.navigate(['/'])
       });
 
     try
     {
       this.userService.login(email, password).then(() => {
-        console.log("o kurwa raketa")
         this.router.navigate(['']);
       }).catch(err => this.apiError = err.error);
     } catch (err) {
       this.apiError = err.error;
     }
-
-      //console.log(req.subscribe());
   }
 }

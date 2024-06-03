@@ -23,8 +23,6 @@ export class ProfileComponent {
     if (file) {
       this.fileName = file.name;
 
-      console.log(file)
-
       const upload$ = this.userService.uploadImg(file)
         .pipe(
           finalize(() => this.reset())

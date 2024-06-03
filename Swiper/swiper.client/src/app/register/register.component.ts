@@ -63,18 +63,14 @@ export class RegisterComponent implements OnInit{
 
     let user = new UserCreationDTO(username, email, password);
 
-    console.log("test")
-
     if(!this.registerForm.valid)
     {
-      console.log("Fuck you")
       return;
     }
 
     try
     {
       this.userService.register(user).then(() => {
-        console.log("o kurwa raketa")
         this.router.navigate(['']);
       })
         .catch(err => this.apiError = err.error);

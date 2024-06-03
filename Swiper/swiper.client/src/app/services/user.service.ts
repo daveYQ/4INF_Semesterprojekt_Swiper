@@ -24,15 +24,10 @@ export class UserService {
   }
 
   getAllUsers() {
-    console.log("GETUSERS")
       return this.http.get<UserDTO[]>(this.url + '/User')
   }
 
   async login(email: string, password: string, options?: any) {
-    console.log('email:', email);
-    console.log('pwd:', password);
-
-    // Set headers if necessary
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -46,7 +41,6 @@ export class UserService {
         withCredentials: true
       };
 
-    // Merge headers with options if provided
     const requestOptions = {
       headers: headers,
       ...opts
@@ -57,7 +51,6 @@ export class UserService {
 
   async register(user: UserCreationDTO, options?: any)
   {
-    console.log(user);
     return await firstValueFrom(this.http.post(this.url + "/User/Register", user, options));
   }
 
@@ -85,9 +78,7 @@ export class UserService {
 
     try {
       await firstValueFrom(this.http.post(this.url + '/User/LogOff', {}, opts));
-      console.info("Logged out");
     } catch (error) {
-      console.error(error);
       throw error; // Or handle the error appropriately
     }
   }

@@ -63,7 +63,7 @@ namespace Swiper.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            User? user = _context.Users.Find(id);
+            User? user = _context.Users.Include(u=> u.Images).ToList().Find(u => u.Id == id);
 
             if (user is null)
             {
@@ -75,9 +75,13 @@ namespace Swiper.Server.Controllers
                 await _signInManager.SignOutAsync();
             }
 
+            if (user.Images is not null)
+            {
+                _context.Images.RemoveRange(user.Images);
+            }
             _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
 
+            await _context.SaveChangesAsync();
             return Ok(_mapper.Map<UserModDTO>(user));
         }
 
@@ -85,12 +89,9 @@ namespace Swiper.Server.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteAll()
         {
-            var users = _context.Users;
+            var users = _context.Users.Include(u => u.Images).ToList();
 
-            foreach (var user in users)
-            {
-                user.Images = null;
-            }
+            _context.Images.RemoveRange(_context.Images);
 
             _context.RemoveRange(users);
             await _context.SaveChangesAsync();

@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SwipeComponent } from './swipe/swipe.component';
 import {NgOptimizedImage} from "@angular/common";
-import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { LoginComponent } from './login/login.component';

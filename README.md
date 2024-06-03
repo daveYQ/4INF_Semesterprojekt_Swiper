@@ -49,6 +49,7 @@ Hier sieht man alle Benutzer mit den relevantesten Daten. Es steht ein Knopf zur
         }
 ```
 Diese Route gibt an, ob der Server online ist, oder nicht. Wenn er das ist, wird "Up" zurückgeben mit dem Statuscode 200.
+![Health-Route](./Docs/SwaggerHealth.png)
 
 ### GET User
 ```cs
@@ -59,6 +60,7 @@ Diese Route gibt an, ob der Server online ist, oder nicht. Wenn er das ist, wird
         }
 ```
 Diese Route gibt alle User zurück, welche in der Datenbank gespeichert sind.
+![User-Route](./Docs/SwaggerUser.png)
 
 ### GET User/{id}
 ```cs
@@ -76,6 +78,7 @@ Diese Route gibt alle User zurück, welche in der Datenbank gespeichert sind.
         }
 ```
 Diese Route ist nur für Moderatoren und Administratoren zugänglich und gibt den User mit der entsprechenden ID zurück.
+![UserID-Route](./Docs/SwaggerUserID.png)
 
 ### DELETE User/{id}
 ```cs
@@ -102,6 +105,7 @@ Diese Route ist nur für Moderatoren und Administratoren zugänglich und gibt de
         }
 ```
 Diese Route ist ausschließlich für Administratoren zugänglich und löscht den User mit der entsprechenden ID.
+![DeleteID-Route](./Docs/SwaggerDeleteID.png)
 
 ### DELETE User/
 ```cs
@@ -125,6 +129,7 @@ Diese Route ist ausschließlich für Administratoren zugänglich und löscht den
         }
 ```
 Diese Route ist ausschließlich für Administratoren zugänglich und löscht alle User.
+![Delete-Route](./Docs/SwaggerDelete.png)
 
 ### POST User/Register
 ```cs
@@ -160,6 +165,7 @@ Diese Route ist ausschließlich für Administratoren zugänglich und löscht all
         }
 ```
 Diese Route legt einen neuen Benutzer an.
+![Registrierung-Route](./Docs/SwaggerRegister.png)
 
 ### POST User/LogIn
 ```cs
@@ -186,6 +192,7 @@ Diese Route legt einen neuen Benutzer an.
         }
 ```
 An dieser Route kann man sich mit einem User einloggen.
+![LogIn-Route](./Docs/SwaggerLogin.png)
 
 ### POST User/LogOff
 ```cs
@@ -199,6 +206,7 @@ An dieser Route kann man sich mit einem User einloggen.
         }
 ```
 Mit dieser Route kann man sich ausloggen.
+![LogOff-Route](./Docs/SwaggerLogOff.png)
 
 ### GET User/CurrentUser
 ```cs
@@ -214,6 +222,7 @@ Mit dieser Route kann man sich ausloggen.
         }
 ```
 Diese Funktion gibt den aktuellen User zurück, wenn kein User vorhanden wird, wird ein Fehler zurückgegeben.
+![CurrentUser-Route](./Docs/SwaggerCurrentUser.png)
 
 ### POST User/Like
 ```cs
@@ -258,6 +267,7 @@ Diese Funktion gibt den aktuellen User zurück, wenn kein User vorhanden wird, w
         }
 ```
 Diese Route lässt einen Benutzer einen anderen Liken.
+![Like-Route](./Docs/SwaggerLike.png)
 
 ### GET User/Matches
 ```cs
@@ -303,6 +313,7 @@ Diese Route lässt einen Benutzer einen anderen Liken.
         }
 ```
 Diese Funktion gibt alle Matches (gegenseitige Likes) zurück.
+![Match-Route](./Docs/SwaggerMatches.png)
 
 ### POST User/ProfilePicture
 ```cs
@@ -345,6 +356,7 @@ Diese Funktion gibt alle Matches (gegenseitige Likes) zurück.
         }
 ```
 Diese Funktion lässt Benutzer Profilbilder herunterladen.
+![ProfilePicture-Route](./Docs/SwaggerProfilePicture.png)
 
 ### GET Block/{id}
 ```cs
@@ -365,6 +377,8 @@ Diese Funktion lässt Benutzer Profilbilder herunterladen.
             return Ok(_mapper.Map<UserModDTO>(user));
         }
 ```
+![Block-Route](./Docs/SwaggerBlock.png)
+
 Diese Route ist nur für Administratoren oder Moderatoren zugänglich und sie sperrt den Benutzer mit der entsprechenden ID.
 
 ## Weitere Technologien
