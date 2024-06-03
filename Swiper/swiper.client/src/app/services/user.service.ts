@@ -24,16 +24,13 @@ export class UserService {
   }
 
   getAllUsers() {
+    console.log("GETUSERS")
       return this.http.get<UserDTO[]>(this.url + '/User')
   }
 
   async login(email: string, password: string, options?: any) {
     console.log('email:', email);
     console.log('pwd:', password);
-
-    // Create the body of the POST request
-    const body = {
-    };
 
     // Set headers if necessary
     const headers = new HttpHeaders({
@@ -55,10 +52,7 @@ export class UserService {
       ...opts
     };
 
-    console.log(body);
-    let user = firstValueFrom(this.http.post<UserDTO>(this.url + '/User/LogIn', body, requestOptions));
-
-    return user;
+    return firstValueFrom(this.http.get<UserDTO>(this.url + '/User/LogIn', requestOptions));
   }
 
   async register(user: UserCreationDTO, options?: any)
@@ -108,5 +102,27 @@ export class UserService {
       observe: 'events',
       withCredentials: true
     });
+  }
+
+  likeUser(id: string)
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    let opts =
+      {
+        params: new HttpParams()
+          .set('id', id),
+        withCredentials: true
+      };
+
+    // Merge headers with options if provided
+    const requestOptions = {
+      headers: headers,
+      ...opts
+    };
+
+    return this.http.post(this.url + "/User/ProfilePicture", null, requestOptions);
   }
 }

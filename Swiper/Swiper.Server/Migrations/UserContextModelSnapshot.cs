@@ -248,7 +248,7 @@ namespace Swiper.Server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Swiper.Server.Models.User", b =>
@@ -257,6 +257,9 @@ namespace Swiper.Server.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsBlocked")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Residence")
                         .HasColumnType("nvarchar(max)");

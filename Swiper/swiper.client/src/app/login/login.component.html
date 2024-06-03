@@ -22,6 +22,7 @@
         <div class="flex justify-end">
           <button mat-raised-button color="primary" class="w-full" (click)="login()">Login</button>
         </div>
+        <mat-error>{{apiError}}</mat-error>
       </form>
     </mat-card-content>
     <a routerLink="/register" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">New here?</a>

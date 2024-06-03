@@ -20,3 +20,22 @@ th, td {
 table {
     margin: 0 auto;
 }
+
+.nav-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+nav {
+  padding: 0 1rem; /* Adjust padding as needed */
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+button.mat-button {
+  position: absolute;
+  right: 0;
+}

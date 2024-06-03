@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,43 +30,6 @@ namespace Swiper.Server.Controllers
             //InitializeDB().Wait();
         }
 
-        private async Task InitializeDB()
-        {
-            var users = _context.Users;
-
-            foreach (var user in users)
-            {
-                user.Images = null;
-            }
-
-            _context.RemoveRange(users);
-            _context.SaveChanges();
-
-            _signInManager.SignOutAsync().Wait();
-
-            User user1 = new User()
-            {
-                UserName = "User1",
-                Email = "user1@mail.com",
-            };
-            User user2 = new User()
-            {
-                UserName = "User2",
-                Email = "user2@mail.com",
-            };
-            User user3 = new User()
-            {
-                UserName = "User3",
-                Email = "user3@mail.com",
-            };
-
-            var res = await _userManager.CreateAsync(user1, "ABCabc123!");
-            await Console.Out.WriteLineAsync(res.Succeeded + "");
-            await _userManager.CreateAsync(user2, "ABCabc123!");
-            await _userManager.CreateAsync(user3, "ABCabc123!");
-
-        }
-
         [HttpGet("/Health")]
         public async Task<IActionResult> Health()
         {
@@ -76,9 +40,13 @@ namespace Swiper.Server.Controllers
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> Index()
         {
-            return Ok(_mapper.Map<IEnumerable<UserDTO>>(this._userManager.Users.Include(user => user.Images).ToList()));
+            return Ok(_mapper.Map<IEnumerable<UserDTO>>(this._userManager.Users.Include(user => user.Images).ToList().Where(u =>
+            {
+                return !u.IsBlocked && u.Images.Count > 0;
+            })));
         }
 
+        [Authorize(Roles = "Moderator,Administrator")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(string id)
         {
@@ -88,9 +56,10 @@ namespace Swiper.Server.Controllers
                 return BadRequest("User not found.");
             }
 
-            return Ok(_mapper.Map<UserDTO>(user));
+            return Ok(_mapper.Map<UserModDTO>(user));
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -109,9 +78,10 @@ namespace Swiper.Server.Controllers
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
-            return Ok(_mapper.Map<UserDTO>(user));
+            return Ok(_mapper.Map<UserModDTO>(user));
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete]
         public async Task<IActionResult> DeleteAll()
         {
@@ -155,7 +125,7 @@ namespace Swiper.Server.Controllers
 
                 string err = "";
 
-                foreach(var error in result.Errors)
+                foreach (var error in result.Errors)
                 {
                     err += error.Description + Environment.NewLine;
                 }
@@ -168,7 +138,7 @@ namespace Swiper.Server.Controllers
             }
         }
 
-        [HttpPost("LogIn")]
+        [HttpGet("LogIn")]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> LogIn(string email, string password, bool rememberMe)
         {
@@ -184,12 +154,13 @@ namespace Swiper.Server.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest();
+                return BadRequest("Invalid Password!");
             }
 
             return Ok(_mapper.Map<UserDTO>(user));
         }
 
+        [Authorize]
         [HttpPost("LogOff")]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
@@ -198,19 +169,19 @@ namespace Swiper.Server.Controllers
             return Ok();
         }
 
+        //[Authorize]
         [HttpGet("CurrentUser")]
-        public async Task<IActionResult> IsLoggedIn() 
+        public async Task<IActionResult> IsLoggedIn()
         {
             if ((User is not null) && User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.GetUserAsync(User);
-                //Workaround
-                var user2 = await _context.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefaultAsync();
-                return Ok(_mapper.Map<UserDTO>(user2));
+                return Ok(_mapper.Map<UserDTO>(user));
             }
             return Ok();
         }
 
+        [Authorize]
         [HttpPost("Like")]
         public async Task<IActionResult> Like(string id)
         {
@@ -250,6 +221,7 @@ namespace Swiper.Server.Controllers
             return Ok("User is liked now.");
         }
 
+        [Authorize]
         [HttpGet("Matches")]
         public async Task<IActionResult> GetMatches()
         {
@@ -290,6 +262,7 @@ namespace Swiper.Server.Controllers
             return Ok(_mapper.Map<List<UserDTO>>(matches));
         }
 
+        [Authorize]
         [HttpPost("ProfilePicture")]
         public async Task<IActionResult> UploadPfp(IFormFile file)
         {
@@ -325,6 +298,23 @@ namespace Swiper.Server.Controllers
             user = await _userManager.FindByIdAsync(user.Id);
 
             return Ok(_mapper.Map<UserDTO>(user));
+        }
+
+        [Authorize(Roles = "Moderator,Administrator")]
+        [HttpGet("Block/{id}")]
+        public async Task<IActionResult> BlockUser(string id)
+        {
+            User? user = await _userManager.FindByIdAsync(id);
+
+            if(user is null)
+            {
+                return NotFound();
+            }
+
+            user.IsBlocked = true;
+            await _userManager.UpdateAsync(user);
+
+            return Ok(_mapper.Map<UserModDTO>(user));
         }
     }
 }

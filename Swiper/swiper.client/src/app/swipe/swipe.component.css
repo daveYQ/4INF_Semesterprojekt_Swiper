@@ -29,7 +29,7 @@
 }
 .tinder--card {
   display: inline-block;
-  height: 70%;
+  height: 60%;
   top: 150px;
   overflow: hidden;
   position: absolute;
@@ -38,6 +38,10 @@
   cursor: -webkit-grab;
   cursor: -moz-grab;
   cursor: grab;
+}
+img{
+  max-height: 512px;
+  max-width:  512px;
 }
 .moving.tinder--card {
   transition: none;
@@ -76,15 +80,7 @@
   right: 0;
 }
 .tinder--buttons button {
-  border-radius: 50%;
-  line-height: 50px;
-  width: 50px;
-  height: 50px;
-  border: 0;
-  background: #fff;
   display: inline-block;
-  padding-top: 10px;
-  margin: 0 12px;
 }
 .tinder--buttons button:focus {
   outline: 0;

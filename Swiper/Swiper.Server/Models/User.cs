@@ -10,5 +10,6 @@ namespace Swiper.Server.Models
         public List<User> LikedUsers { get; set; } 
         public int Age { get; set; }
         public string? Residence { get; set; }
+        public bool IsBlocked { get; set; }
     }
 }

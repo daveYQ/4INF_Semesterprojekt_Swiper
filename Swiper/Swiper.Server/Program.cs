@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Writers;
 using Swiper.Server.DBContexts;
 using Swiper.Server.Models;
 
@@ -19,7 +20,7 @@ namespace Swiper.Server
                 options.AddPolicy(name: allowAngular,
                                   policy =>
                                   {
-                                      policy.WithOrigins("https://localhost:4200")
+                                      policy.WithOrigins("https://localhost:4200", "https://localhost:4200")
                                         .AllowAnyHeader()
                                         .AllowAnyMethod()
                                         .AllowCredentials();
@@ -67,14 +68,13 @@ namespace Swiper.Server
             builder.Services.AddAuthentication();
             builder.Services.AddAuthorization();
 
-            
+
             builder.Services.Configure<IdentityOptions>(options =>
             {
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+/ ";
                 options.User.RequireUniqueEmail = true;
 
             });
-            
 
             var app = builder.Build();
 
@@ -91,8 +91,11 @@ namespace Swiper.Server
 
             //app.UseRouting();
 
-            app.UseDefaultFiles();
+
+            app.UseHttpsRedirection();
+            //app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseRouting();
             app.UseCors(allowAngular);
 
             // Configure the HTTP request pipeline.
@@ -102,12 +105,14 @@ namespace Swiper.Server
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
             app.MapFallbackToFile("/index.html");
+
+            SeedData.Initialize(app.Services).Wait();
+
             app.Run();
         }
     }

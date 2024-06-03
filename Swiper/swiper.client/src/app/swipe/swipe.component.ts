@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, EventEmitter, Output, Renderer2 } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ViewChildren, QueryList, ElementRef, EventEmitter, Output, Renderer2 } from '@angular/core';
 import {UserService} from "../services/user.service";
 import {User} from "../User";
 import {Subject} from "rxjs";
@@ -10,7 +10,7 @@ import {DomSanitizer} from "@angular/platform-browser";
   templateUrl: './swipe.component.html',
   styleUrl: './swipe.component.css'
 })
-export class SwipeComponent implements OnInit{
+export class SwipeComponent implements OnInit, AfterViewInit{
   users: UserDTO[];
 
   @ViewChildren('tinderCard') tinderCards: QueryList<ElementRef>;
@@ -76,7 +76,7 @@ export class SwipeComponent implements OnInit{
   };
 
   handlePanEnd(event) {
-
+    console.log("Panevent")
     this.toggleChoiceIndicator(false,false);
 
     if (!this.users.length) return;

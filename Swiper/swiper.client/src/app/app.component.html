@@ -1,11 +1,9 @@
-<nav class="text-4xl text-center font-bold bg-pink-600 flex justify-between">
-  <div class="w-max justify-self-start">
-    asfghjk
+<nav class="text-4xl text-center font-bold bg-pink-600 flex items-center relative">
+  <div class="flex-1"></div>
+  <a routerLink="/" class="nav-title">Swiper</a>
+  <div class="flex-1 flex justify-end">
+    <button mat-button [matMenuTriggerFor]="dropdown" class="w-max"><mat-icon fontIcon="menu"></mat-icon></button>
   </div>
-
-  <a routerLink="/" class="w-max">Swiper</a>
-
-  <button mat-button [matMenuTriggerFor]="dropdown" class="w-max"><mat-icon fontIcon="menu"></mat-icon></button>
 
   <mat-menu #dropdown="matMenu" class="flex flex-col">
     <a mat-menu-item routerLink="/login">Login</a>
@@ -15,4 +13,4 @@
   </mat-menu>
 </nav>
 
-<router-outlet class="p-0 h-dvh"/>
+<router-outlet class="p-0 h-dvh"></router-outlet>
